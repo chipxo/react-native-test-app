@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { useRouter, useFocusEffect } from "expo-router";
 import "./global.css";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -31,10 +32,20 @@ export default function RootLayout() {
     return null;
   }
 
+  const router = useRouter();
+
+  useFocusEffect(() => {
+    // Call the replace method to redirect to a new route without adding to the history.
+    // We do this in a useFocusEffect to ensure the redirect happens every time the screen
+    // is focused.
+    router.replace("/home");
+  });
+
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="home/index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

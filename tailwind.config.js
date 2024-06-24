@@ -15,6 +15,10 @@ module.exports = {
         "secondary-green-text": "#009E81",
       },
     },
+    container: {
+      padding: "2rem",
+      center: true,
+    },
   },
   plugins: [],
 };
