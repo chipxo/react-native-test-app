@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { Link, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import ProfileItem from "@/components/profile/ProfileItem";
-import { StatusBar } from "expo-status-bar";
 
 const Profile = () => {
   const { t } = useTranslation();
