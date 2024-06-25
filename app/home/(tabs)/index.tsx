@@ -3,24 +3,22 @@ import TestTask from "@/components/home/TestTask";
 import BeforeStart from "@/components/home/BeforeStart";
 import UserName from "@/components/home/UserName";
 import Posts from "@/components/home/Posts";
-import { useIsFetching, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useFetch } from "@/hooks/useFetch";
 import { useTranslation } from "react-i18next";
-import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
 
 const HomePage = () => {
   const { t } = useTranslation();
 
-  const query = "?_limit=3";
+  const query = "?limit=3";
 
-  const { data, isLoading, error, isFetched } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["posts", query],
     queryFn: () => useFetch(query),
   });
 
   if (isLoading) {
-    return <ActivityIndicator />;
+    return <ActivityIndicator size="large" />;
   }
 
   if (error) {
