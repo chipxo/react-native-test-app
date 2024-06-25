@@ -1,6 +1,18 @@
+import { resources } from "@/utils/i18n";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
-export const tabs = [
+type TranslationKeys =
+  | keyof (typeof resources)["en"]["translation"]
+  | keyof (typeof resources)["ar"]["translation"];
+
+type TTab = {
+  id: number;
+  name: string;
+  title: TranslationKeys;
+  tabBarIcon: ({ color }: { color: string }) => JSX.Element;
+};
+
+export const tabs: TTab[] = [
   {
     id: 1,
     name: "index",

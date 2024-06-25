@@ -1,0 +1,17 @@
+{
+  "Home": "Home",
+  "Portfolio": "Portfolio",
+  "Search": "Search",
+  "Profile": "Profile",
+  "yourName": "Your name is",
+  "goToCall": "Go to call",
+  "beforeYouStart": "Before you start",
+  "steps": "{{count}} steps",
+  "posts": "Posts",
+  "about": "About",
+  "comments": "Comments",
+  "back": "Back",
+  "signIn": "Sign In",
+  "signUp": "Sign up",
+  "continue": "Continue"
+}

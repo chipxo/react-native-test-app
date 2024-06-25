@@ -1,11 +1,17 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import LinkIcon from "./LinkIcon";
+import { useTranslation } from "react-i18next";
+import { FontAwesome6 } from "@expo/vector-icons";
+import { Colors } from "@/constants/Colors";
 
 const BeforeStart = () => {
+  const { t } = useTranslation();
   return (
     <View>
-      <Text className="text-secondary-grey mb-2 px-4">Before you start</Text>
+      <Text className="text-secondary-grey mb-2 px-4">
+        {t("beforeYouStart")}
+      </Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -23,8 +29,11 @@ const BeforeStart = () => {
             </View>
           </View>
 
-          <View className="mt-6">
-            <Text className="text-white text-[15px]">2 steps {"    ->"}</Text>
+          <View className="mt-6 flex-row justify-between items-center">
+            <Text className="text-white text-[15px]">
+              {t("steps", { count: 2 })}
+            </Text>
+            <FontAwesome6 name="arrow-right" size={20} color={Colors.white} />
           </View>
         </View>
         <View className="bg-secondary-red rounded-xl p-6 w-[233] h-[152]">
@@ -38,10 +47,15 @@ const BeforeStart = () => {
               <Text className="text-white text-[15px]">Lorem ipsum</Text>
             </View>
           </View>
-          <View className="mt-6">
+          <View className="mt-6 flex-row justify-between items-center">
             <Text className="text-secondary-grey text-[15px]">
-              3 steps {"    ->"}
+              {t("steps", { count: 3 })}
             </Text>
+            <FontAwesome6
+              name="arrow-right"
+              size={20}
+              color={Colors.secondaryGrey}
+            />
           </View>
         </View>
       </ScrollView>

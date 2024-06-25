@@ -4,6 +4,8 @@ import { items } from "@/constants/WelcomeItems";
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
 import WelcomeItems from "@/components/welcome/WelcomeItems";
+import CommonButton from "@/components/CommonButton";
+import { t } from "i18next";
 
 export default function WelcomeScreen() {
   return (
@@ -17,21 +19,13 @@ export default function WelcomeScreen() {
 
         <View className="mx-6 mt-[100px] rounded-[16px] py-2">
           <Button
-            title="Sign in"
+            title={t("signIn")}
             color={Colors.primary}
-            accessibilityLabel="Sign in"
+            accessibilityLabel={t("signIn")}
           />
         </View>
 
-        <View className="mx-6 rounded-[16px] bg-primary py-2">
-          <Button
-            title="Sign up"
-            color={Colors.white}
-            accessibilityLabel="Sign in"
-          />
-        </View>
-
-        <Link href="home">Go home</Link>
+        <CommonButton title={t("signUp")} />
       </View>
     </SafeAreaView>
   );

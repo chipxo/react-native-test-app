@@ -9,7 +9,7 @@ type BottomButtonProps = {
 
 const BottomButton = ({ onPress, title }: BottomButtonProps) => {
   return (
-    <View className="h-[98] absolute bottom-0 z-[10] left-0 bg-white w-full pt-3 px-4 border-t border-[#E6EBF5]">
+    <View className="h-[98] absolute bottom-0 z-[10] left-0 bg-white w-full pt-3 border-t border-[#E6EBF5]">
       <CommonButton title={title} onPress={onPress} />
     </View>
   );
