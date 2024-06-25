@@ -18,5 +18,8 @@
   "basic": "Basic",
   "language": "Language",
   "other": "Other",
-  "logOut": "Log Out"
+  "logOut": "Log Out",
+  "searchProducts": "Search Products...",
+  "noProducts": "No results found",
+  "error": "An error occurred"
 }
