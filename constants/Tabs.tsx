@@ -1,9 +1,6 @@
 import { resources } from "@/utils/i18n";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
-import { Colors } from "./Colors";
-import { Entypo } from "@expo/vector-icons";
 import { ScreenProps } from "expo-router/build/useScreens";
-import { Pressable } from "react-native";
 
 type TranslationKeys =
   | keyof (typeof resources)["en"]["translation"]
@@ -11,15 +8,8 @@ type TranslationKeys =
 
 type TTab = ScreenProps & {
   id: number;
-  // name: string;
   options: {
     title: TranslationKeys;
-    //   headerShown: boolean;
-    //   headerTitle?: string;
-    //   headerBackTitleVisible?: boolean;
-    //   headerLeft?: () => JSX.Element;
-    //   headerTintColor?: string;
-    //   tabBarIcon: ({ color }: { color: string }) => JSX.Element;
   };
 };
 
@@ -65,12 +55,7 @@ export const tabs: TTab[] = [
       headerShown: false,
       headerTitle: "",
       headerBackTitleVisible: true,
-      headerLeft: () => (
-        <Pressable className="-translate-x-2">
-          <Ionicons name="chevron-back" size={30} color={Colors.backBtn} />
-        </Pressable>
-      ),
-      headerTintColor: Colors.backBtn,
+
       tabBarIcon: ({ color }: { color: string }) => (
         <FontAwesome size={28} name="user" color={color} />
       ),

@@ -14,5 +14,9 @@
   "signIn": "Sign In",
   "signUp": "Sign up",
   "continue": "Continue",
-  "settings": "Settings"
+  "settings": "Settings",
+  "basic": "Basic",
+  "language": "Language",
+  "other": "Other",
+  "logOut": "Log Out"
 }
