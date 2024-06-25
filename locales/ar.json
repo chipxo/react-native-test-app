@@ -19,5 +19,7 @@
   "language": "اللغة",
   "other": "أخرى",
   "logOut": "تسجيل الخروج",
-  "searchProducts": "البحث عن المنتجات..."
+  "searchProducts": "البحث عن المنتجات...",
+  "noProducts": "لم يتم العثور على نتائج",
+  "error": "حدث خطأ"
 }

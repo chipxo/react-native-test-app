@@ -10,12 +10,13 @@ import { useTranslation } from "react-i18next";
 const HomePage = () => {
   const { t } = useTranslation();
 
-  const query = "?limit=3";
+  const query = "?_limit=3";
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts", query],
     queryFn: () => useFetch(query),
   });
+  console.log("home data", data);
 
   if (isLoading) {
     return <ActivityIndicator size="large" />;

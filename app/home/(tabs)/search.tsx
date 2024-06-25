@@ -13,6 +13,7 @@ import { Colors } from "@/constants/Colors";
 import { useQuery } from "@tanstack/react-query";
 import { useFetch } from "@/hooks/useFetch";
 import { debounce } from "lodash";
+import SearchItems from "@/components/search/SearchItems";
 
 const Search = () => {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ const Search = () => {
   const debouncedSearch = useCallback(
     debounce((value: string) => {
       setDebouncedText(value);
-    }, 300), // Adjust the debounce delay as needed
+    }, 300),
     []
   );
 
@@ -30,11 +31,10 @@ const Search = () => {
     debouncedSearch(text);
   }, [text, debouncedSearch]);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, isFetched } = useQuery({
     queryKey: ["posts", debouncedText],
     queryFn: () =>
       useFetch(debouncedText ? `?title_like=${debouncedText}` : ""),
-    // Only fetch data when there's a search query
   });
 
   return (
@@ -55,27 +55,15 @@ const Search = () => {
 
         {isLoading && <ActivityIndicator />}
 
-        {error && <Text>An error occurred</Text>}
+        {error && <Text>{t("error")}</Text>}
 
         {!isLoading && data?.length === 0 && (
           <Text className="text-secondary-grey text-center text-[18px] pt-10">
-            No results found!
+            {t("noProducts")}
           </Text>
         )}
 
-        {!isLoading && data && (
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id.toString()}
-            scrollEnabled={false}
-            renderItem={({ item }) => (
-              <View className="bg-white w-full rounded-[16px] p-4 mb-2">
-                <Text className="font-semibold text-[15px]">ID: {item.id}</Text>
-                <Text>Name: {item.title}</Text>
-              </View>
-            )}
-          />
-        )}
+        {!isLoading && data && <SearchItems data={data} />}
       </View>
     </ScrollView>
   );
