@@ -8,15 +8,11 @@ export default function TabLayout() {
 
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: Colors.primary }}>
-      {tabs.map(({ id, name, title, tabBarIcon }) => (
+      {tabs.map(({ id, name, options }) => (
         <Tabs.Screen
           key={id}
           name={name}
-          options={{
-            title: t(title),
-            headerShown: false,
-            tabBarIcon,
-          }}
+          options={{ ...options, title: t(options?.title) }}
         />
       ))}
     </Tabs>
