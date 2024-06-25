@@ -1,8 +1,8 @@
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, usePathname } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-import { useRouter, useFocusEffect } from "expo-router";
+import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { QueryClient } from "@tanstack/react-query";
@@ -14,22 +14,41 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
 import "@/global.css";
 import { Pressable, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [color, setColor] = useState<"dark" | "light">("dark");
+
   const router = useRouter();
+
+  const pathname = usePathname();
+  const curPath = pathname.split("/").at(-1);
 
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         gcTime: 1000 * 60 * 60 * 24, // 24 hours
+        refetchOnWindowFocus: false, // Optional: Disable refetching on window focus
+        staleTime: 1000 * 60 * 5, // Optional: Set stale time for queries
       },
     },
   });
 
+  const allQueryKeys = queryClient.getQueryCache().getAll();
+  // console.log("allQueryKeys", allQueryKeys);
+
   const asyncStoragePersister = createAsyncStoragePersister({
     storage: AsyncStorage,
+    // serialize: (data) => {
+    //   console.log("Serializing data:", data);
+    //   return JSON.stringify(data);
+    // },
+    // deserialize: (data) => {
+    //   console.log("Deserializing data:", data);a
+    //   return JSON.parse(data);
+    // },
   });
 
   const [loaded] = useFonts({
@@ -42,9 +61,13 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  useFocusEffect(() => {
-    if (loaded) router.replace("/home/profile");
-  });
+  useEffect(() => {
+    if (curPath === "home") {
+      setColor("light");
+    } else {
+      setColor("dark");
+    }
+  }, [curPath]);
 
   if (!loaded) {
     return null;
@@ -55,9 +78,11 @@ export default function RootLayout() {
       client={queryClient}
       persistOptions={{ persister: asyncStoragePersister }}
     >
+      <StatusBar style={color} />
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="home/(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="home/language" options={{ headerShown: false }} />
         <Stack.Screen
           name="home/[id]"
           options={{
@@ -72,7 +97,7 @@ export default function RootLayout() {
               >
                 <Ionicons
                   name="chevron-back"
-                  size={30}
+                  size={24}
                   color={Colors.backBtn}
                 />
               </Pressable>
