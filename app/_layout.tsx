@@ -30,8 +30,6 @@ export default function RootLayout() {
     defaultOptions: {
       queries: {
         gcTime: 1000 * 60 * 60 * 24, // 24 hours
-        refetchOnWindowFocus: false,
-        staleTime: 1000 * 60 * 5, // Optional: Set stale time for queries
       },
     },
   });
@@ -49,6 +47,7 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
 
   useFocusEffect(() => {
     if (loaded) router.push("(auth)/signUp");
