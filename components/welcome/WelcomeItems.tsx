@@ -13,12 +13,13 @@ type WelcomeItemsProps = {
 
 const WelcomeItems = ({ items }: WelcomeItemsProps) => {
   return (
-    <View className="flex flex-row p-6 gap-6">
+    <View className="flex flex-row p-6 space-x-6">
       <View>
         <FlatList
           data={items.slice(0, 3)}
           renderItem={({ item }) => <View className="my-3">{item.item}</View>}
           keyExtractor={(item) => item.title}
+          scrollEnabled={false}
         />
       </View>
 
@@ -27,6 +28,7 @@ const WelcomeItems = ({ items }: WelcomeItemsProps) => {
           data={items.slice(3)}
           renderItem={({ item }) => <View className="my-3">{item.item}</View>}
           keyExtractor={(item) => item.title}
+          scrollEnabled={false}
         />
       </View>
     </View>

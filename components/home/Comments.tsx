@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { View, Text, FlatList } from "react-native";
 
 type Comment = {
@@ -13,9 +14,11 @@ type CommentsProps = {
 };
 
 const Comments = ({ comments }: CommentsProps) => {
+  const { t } = useTranslation();
+
   return (
     <View className="pb-[100] mt-6">
-      <Text className="mb-2 text-secondary-grey">Comments</Text>
+      <Text className="mb-2 text-secondary-grey">{t("comments")}</Text>
       <FlatList
         data={comments}
         keyExtractor={(item) => item.name}

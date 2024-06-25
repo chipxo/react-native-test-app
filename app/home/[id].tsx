@@ -17,9 +17,11 @@ import { useFetch } from "@/hooks/useFetch";
 import postImage from "@/assets/images/post/post.png";
 import BottomButton from "@/components/BottomButton";
 import Comments from "@/components/home/Comments";
+import { useTranslation } from "react-i18next";
 
 const Post = () => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const { id } = useLocalSearchParams();
   const { data, isLoading, error } = useQuery({
@@ -46,21 +48,21 @@ const Post = () => {
 
   return (
     <>
-      <BottomButton title="Back" onPress={() => router.back()} />
+      <BottomButton title={t("back")} onPress={() => router.back()} />
 
       <ScrollView className="bg-background space-y-6">
         <View className="bg-white min-h-[430] rounded-b-[20] items-center justify-end pb-10 space-y-8">
           <StatusBar barStyle="dark-content" />
 
           <Text className="text-[28px] text-center px-4 font-bold">
-            {data?.title[0].toUpperCase() + data?.title.slice(1)}
+            {data?.title}
           </Text>
           <Image source={postImage} />
         </View>
 
         <View className="mx-4">
           <View>
-            <Text className="text-secondary-grey mb-2">About</Text>
+            <Text className="text-secondary-grey mb-2">{t("about")}</Text>
             <View className="bg-white rounded-[16px] p-4">
               <Text>{data?.body}</Text>
             </View>
