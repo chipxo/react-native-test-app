@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,tsx,ts,jsx}"],
+  content: ["./app/**/*.{js,tsx,ts,jsx}", "./components/**/*.{js,tsx,ts,jsx}"],
   theme: {
     extend: {
       colors: {
@@ -11,7 +11,7 @@ module.exports = {
         "secondary-green": "#00A385",
         "tab-icon-default": "#606773",
         "primary-text": "#06070A",
-        "secondary-text": "#858C94",
+        "secondary-text": "#414141",
         "secondary-green-text": "#009E81",
       },
     },

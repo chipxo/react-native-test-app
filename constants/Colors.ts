@@ -7,10 +7,12 @@ const tabIconDefault = "#606773";
 const primaryText = "#06070A";
 const secondaryText = "#858C94";
 const secondaryGreenText = "#009E81";
+const white = "#FFFFFF";
 
 export const Colors = {
   light: {
     primary: primary,
+    white: white,
     background: background,
     secondaryGrey: secondaryGrey,
     secondaryRed: secondaryRed,
