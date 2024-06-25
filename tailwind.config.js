@@ -13,6 +13,7 @@ module.exports = {
         "primary-text": "#06070A",
         "secondary-text": "#414141",
         "secondary-green-text": "#009E81",
+        "secondary-green-muted": "#E9F7F2",
         "common-border": "#CED5E0",
         "profile-fallback": "#EBEFF5",
       },

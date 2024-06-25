@@ -18,5 +18,9 @@
   "basic": "Basic",
   "language": "Language",
   "other": "Other",
-  "logOut": "Log Out"
+  "logOut": "Log Out",
+  "persAcc": "Personal Account",
+  "name": "Name",
+  "email": "E-mail",
+  "password": "Password"
 }

@@ -1,5 +1,5 @@
 import { useFonts } from "expo-font";
-import { Stack, usePathname } from "expo-router";
+import { Stack, useFocusEffect, usePathname } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
@@ -30,25 +30,14 @@ export default function RootLayout() {
     defaultOptions: {
       queries: {
         gcTime: 1000 * 60 * 60 * 24, // 24 hours
-        refetchOnWindowFocus: false, // Optional: Disable refetching on window focus
+        refetchOnWindowFocus: false,
         staleTime: 1000 * 60 * 5, // Optional: Set stale time for queries
       },
     },
   });
 
-  const allQueryKeys = queryClient.getQueryCache().getAll();
-  // console.log("allQueryKeys", allQueryKeys);
-
   const asyncStoragePersister = createAsyncStoragePersister({
     storage: AsyncStorage,
-    // serialize: (data) => {
-    //   console.log("Serializing data:", data);
-    //   return JSON.stringify(data);
-    // },
-    // deserialize: (data) => {
-    //   console.log("Deserializing data:", data);a
-    //   return JSON.parse(data);
-    // },
   });
 
   const [loaded] = useFonts({
@@ -60,6 +49,11 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  useFocusEffect(() => {
+    if (loaded) router.push("(auth)/signUp");
+    // if (loaded) router.push("/");
+  });
 
   useEffect(() => {
     if (curPath === "home") {
@@ -81,6 +75,8 @@ export default function RootLayout() {
       <StatusBar style={color} />
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/signIn" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/signUp" options={{ headerShown: false }} />
         <Stack.Screen name="home/(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="home/language" options={{ headerShown: false }} />
         <Stack.Screen
