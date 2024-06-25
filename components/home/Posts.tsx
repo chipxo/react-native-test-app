@@ -2,7 +2,7 @@ import { View, Text, FlatList, Pressable } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
 
-type Post = {
+export type Post = {
   userId: number;
   id: number;
   title: string;

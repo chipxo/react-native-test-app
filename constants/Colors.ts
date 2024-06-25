@@ -8,31 +8,19 @@ const primaryText = "#06070A";
 const secondaryText = "#858C94";
 const secondaryGreenText = "#009E81";
 const white = "#FFFFFF";
+const backBtn = "#606773";
 
 export const Colors = {
-  light: {
-    primary: primary,
-    white: white,
-    background: background,
-    secondaryGrey: secondaryGrey,
-    secondaryRed: secondaryRed,
-    secondaryGreen: secondaryGreen,
-    tabIconDefault: tabIconDefault,
-    tabIconSelected: primary,
-    primaryText: primaryText,
-    secondaryText: secondaryText,
-    secondaryGreenText: secondaryGreenText,
-  },
-  dark: {
-    primary: primary,
-    background: background,
-    secondaryGrey: secondaryGrey,
-    secondaryRed: secondaryRed,
-    secondaryGreen: secondaryGreen,
-    tabIconDefault: tabIconDefault,
-    tabIconSelected: primary,
-    primaryText: primaryText,
-    secondaryText: secondaryText,
-    secondaryGreenText: secondaryGreenText,
-  },
+  primary,
+  white,
+  background,
+  secondaryGrey,
+  secondaryRed,
+  secondaryGreen,
+  tabIconDefault,
+  primaryText,
+  secondaryText,
+  secondaryGreenText,
+  backBtn,
+  tabIconSelected: primary,
 };

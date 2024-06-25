@@ -18,7 +18,7 @@ export default function WelcomeScreen() {
         <View className="mx-6 mt-[100px] rounded-[16px] py-2">
           <Button
             title="Sign in"
-            color={Colors.light.primary}
+            color={Colors.primary}
             accessibilityLabel="Sign in"
           />
         </View>
@@ -26,7 +26,7 @@ export default function WelcomeScreen() {
         <View className="mx-6 rounded-[16px] bg-primary py-2">
           <Button
             title="Sign up"
-            color={Colors.light.white}
+            color={Colors.white}
             accessibilityLabel="Sign in"
           />
         </View>
