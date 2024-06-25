@@ -48,9 +48,11 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  // useFocusEffect(() => {
-  //   if (loaded) router.navigate("home/search");
-  // });
+
+  useFocusEffect(() => {
+    if (loaded) router.push("(auth)/signUp");
+    // if (loaded) router.push("/");
+  });
 
   useEffect(() => {
     if (curPath === "home") {
@@ -72,6 +74,8 @@ export default function RootLayout() {
       <StatusBar style={color} />
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/signIn" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/signUp" options={{ headerShown: false }} />
         <Stack.Screen name="home/(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="home/language" options={{ headerShown: false }} />
         <Stack.Screen
