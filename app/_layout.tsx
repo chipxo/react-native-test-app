@@ -28,9 +28,9 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  useFocusEffect(() => {
-    if (loaded) router.replace("/home");
-  });
+  // useFocusEffect(() => {
+  //   if (loaded) router.replace("/home");
+  // });
 
   if (!loaded) {
     return null;
@@ -40,9 +40,12 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="home/index" options={{ headerShown: false }} />
-        <Stack.Screen name="home/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="home/(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="home/[id]"
+          options={{ headerShown: false }}
+          getId={({ params }) => String(Date.now())}
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
     </QueryClientProvider>

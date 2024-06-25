@@ -4,7 +4,6 @@ import { useLocalSearchParams } from "expo-router";
 
 const Post = () => {
   const { id } = useLocalSearchParams();
-  console.log(id);
 
   return (
     <SafeAreaView>

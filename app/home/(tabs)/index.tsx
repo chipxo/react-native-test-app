@@ -1,22 +1,25 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import TestTask from "@/components/home/TestTask";
 import BeforeStart from "@/components/home/BeforeStart";
 import UserName from "@/components/home/UserName";
 import Posts from "@/components/home/Posts";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useFetch } from "@/hooks/useFetch";
 
 const HomePage = () => {
-  const queryClient = useQueryClient();
-  useEffect(() => {
-    useFetch("?_limit=3");
-  }, []);
-  // Queries
-  const query = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["posts"],
     queryFn: () => useFetch("?_limit=3"),
   });
+
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>An error occured</Text>;
+  }
 
   return (
     <ScrollView>
@@ -34,9 +37,9 @@ const HomePage = () => {
         </View>
 
         <View className="px-4">
-          <Text className="text-secondary-grey mb-2">Posts</Text>
+          <Text className="text-secondary-grey ">Posts</Text>
 
-          <Posts posts={query.data} />
+          <Posts posts={data} />
         </View>
       </View>
     </ScrollView>

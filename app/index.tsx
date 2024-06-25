@@ -3,6 +3,7 @@ import BgImg from "@/components/BgImg";
 import { items } from "@/constants/WelcomeItems";
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
+import WelcomeItems from "@/components/welcome/WelcomeItems";
 
 export default function WelcomeScreen() {
   return (
@@ -11,30 +12,8 @@ export default function WelcomeScreen() {
         <BgImg />
       </View>
 
-      {/* <WelcomeItems items={items} />
-       */}
       <View className="min-h-screen">
-        <View className="flex flex-row p-6 gap-6">
-          <View>
-            <FlatList
-              data={items.slice(0, 3)}
-              renderItem={({ item }) => (
-                <View className="mb-6">{item.item}</View>
-              )}
-              keyExtractor={(item) => item.title}
-            />
-          </View>
-
-          <View className="pt-[68]">
-            <FlatList
-              data={items.slice(3)}
-              renderItem={({ item }) => (
-                <View className="mb-6">{item.item}</View>
-              )}
-              keyExtractor={(item) => item.title}
-            />
-          </View>
-        </View>
+        <WelcomeItems items={items} />
 
         <View className="mx-6 mt-[100px] rounded-[16px] py-2">
           <Button
@@ -51,7 +30,8 @@ export default function WelcomeScreen() {
             accessibilityLabel="Sign in"
           />
         </View>
-        <Link href="/home">Go home</Link>
+
+        <Link href="home">Go home</Link>
       </View>
     </SafeAreaView>
   );
