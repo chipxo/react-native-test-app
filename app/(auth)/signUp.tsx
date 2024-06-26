@@ -21,6 +21,8 @@ import { SubmitHandler, useForm, useController } from "react-hook-form";
 import { SignUpSchema, signUpSchema } from "@/constants/formSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/form/Input";
+import ErrorIndicator from "@/components/form/ErrorIndicator";
+import ErrorItem from "@/components/form/ErrorItem";
 
 type FormSchema = {
   name: string;
@@ -41,6 +43,7 @@ const SignUp = () => {
   const { t } = useTranslation();
 
   const onSubmit: SubmitHandler<SignUpSchema> = (data) => {
+    Keyboard.dismiss();
     console.log(data);
   };
   return (
@@ -70,6 +73,7 @@ const SignUp = () => {
 
               <View>
                 <View>
+                  {errors.name && <ErrorItem error={errors.name.message} />}
                   <Text className="pl-8 text-tab-icon-default">
                     {t("name")}
                   </Text>
@@ -78,6 +82,7 @@ const SignUp = () => {
                 </View>
 
                 <View>
+                  {errors.email && <ErrorItem error={errors.email.message} />}
                   <Text className="pl-8 text-tab-icon-default">
                     {t("email")}
                   </Text>
@@ -86,6 +91,9 @@ const SignUp = () => {
                 </View>
 
                 <View>
+                  {errors.password && (
+                    <ErrorItem error={errors.password.message} isPassword />
+                  )}
                   <Text className="pl-8 text-tab-icon-default">
                     {t("password")}
                   </Text>
@@ -96,7 +104,7 @@ const SignUp = () => {
                     secureTextEntry={showPass}
                   />
                   <Pressable
-                    className="absolute right-8 top-12"
+                    className="absolute right-8 top-10"
                     onPress={() => setShowPass((prev) => !prev)}
                   >
                     <AntDesign

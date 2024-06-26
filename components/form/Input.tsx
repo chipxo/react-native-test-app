@@ -23,7 +23,7 @@ const Input = ({ name, control, error, ...props }: InputProps) => {
       value={field.value}
       onChangeText={field.onChange}
       className={cn(
-        "mx-4 mb-6 mt-4 rounded-[16px] border py-4 pl-4",
+        "mx-4 mb-8 mt-2 rounded-[16px] border py-4 pl-4",
         error ? "border-secondary-red" : "border-profile-fallback",
       )}
     />
