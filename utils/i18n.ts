@@ -13,8 +13,10 @@ export const resources = {
 } as const;
 
 i18n.use(initReactI18next).init({
-  resources,
+  compatibilityJSON: "v3",
   lng: "en",
+  fallbackLng: "en",
+  resources,
 
   interpolation: {
     escapeValue: false,
