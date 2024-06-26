@@ -10,6 +10,7 @@ const secondaryGreenText = "#009E81";
 const white = "#FFFFFF";
 const backBtn = "#606773";
 const chevroneMuted = "#C1C4CB";
+const black = "#000000";
 
 export const Colors = {
   primary,
@@ -24,5 +25,6 @@ export const Colors = {
   secondaryGreenText,
   backBtn,
   chevroneMuted,
+  black,
   tabIconSelected: primary,
 };

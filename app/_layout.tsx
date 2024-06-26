@@ -51,7 +51,7 @@ export default function RootLayout() {
   }, [loaded]);
 
   useFocusEffect(() => {
-    if (loaded) router.push("(auth)/signUp");
+    // if (loaded) router.push("(auth)/signUp");
     // if (loaded) router.push("/");
   });
 

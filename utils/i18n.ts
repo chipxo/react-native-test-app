@@ -3,6 +3,10 @@ import { initReactI18next } from "react-i18next";
 import en from "@/locales/en.json";
 import ar from "@/locales/ar.json";
 
+export type TranslationKeys =
+  | keyof (typeof resources)["en"]["translation"]
+  | keyof (typeof resources)["ar"]["translation"];
+
 export const resources = {
   en: {
     translation: en,

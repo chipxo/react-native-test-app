@@ -1,10 +1,6 @@
-import { resources } from "@/utils/i18n";
+import { TranslationKeys, resources } from "@/utils/i18n";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { ScreenProps } from "expo-router/build/useScreens";
-
-type TranslationKeys =
-  | keyof (typeof resources)["en"]["translation"]
-  | keyof (typeof resources)["ar"]["translation"];
 
 type TTab = ScreenProps & {
   id: number;
