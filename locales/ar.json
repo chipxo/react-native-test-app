@@ -28,5 +28,8 @@
   "changeAcc": "تغيير الحساب",
   "enterCode": "أدخل {{count}} الرمز الرقمي",
   "createCode": "إنشاء رمز سري",
-  "repeatCode": "كرر الرمز السري"
+  "repeatCode": "كرر الرمز السري",
+  "searchProducts": "البحث عن المنتجات...",
+  "noProducts": "لم يتم العثور على نتائج",
+  "error": "حدث خطأ"
 }
