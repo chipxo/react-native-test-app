@@ -5,15 +5,15 @@ import { cn } from "@/utils/cn";
 import { Colors } from "@/constants/Colors";
 
 type ErrorItemProps = {
-  error: string | undefined;
+  errorMessage: string | undefined;
   isPassword?: boolean;
 };
 
-const ErrorItem = ({ error, isPassword }: ErrorItemProps) => {
+const ErrorItem = ({ errorMessage, isPassword = false }: ErrorItemProps) => {
   return (
     <>
       <Text className="absolute -top-4 mb-2 pl-8 text-secondary-red">
-        {error}
+        {errorMessage}
       </Text>
       <View
         className={cn("absolute top-[43]", isPassword ? "right-16" : "right-8")}

@@ -1,46 +1,31 @@
-import {
-  View,
-  SafeAreaView,
-  Button,
-  FlatList,
-  ImageBackground,
-  Image,
-} from "react-native";
-import BgImg from "@/components/BgImg";
-import { items } from "@/constants/WelcomeItems";
-import { Colors } from "@/constants/Colors";
-import { Link, useRouter } from "expo-router";
-import WelcomeItems from "@/components/welcome/WelcomeItems";
-import CommonButton from "@/components/CommonButton";
-import { t } from "i18next";
+import { RootState } from "@/redux/store";
 import "@/utils/i18n";
-import bg from "@/assets/images/bg.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Redirect } from "expo-router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import * as SecureStore from "expo-secure-store";
+import i18n from "@/utils/i18n";
 
-export default function WelcomeScreen() {
-  const router = useRouter();
-  return (
-    <>
-      <SafeAreaView>
-        <View>
-          <WelcomeItems items={items} />
+export default function HomeScreen() {
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
+  const { lan } = useSelector((state: RootState) => state.lang);
 
-          <View className="mx-6 mt-[100px] rounded-[16px] py-2">
-            <Button
-              title={t("signIn")}
-              color={Colors.primary}
-              accessibilityLabel={t("signIn")}
-              onPress={() => router.navigate("(auth)/signIn")}
-            />
-          </View>
+  useEffect(() => {
+    i18n.changeLanguage(lan);
+  }, [lan]);
 
-          <CommonButton
-            title={t("signUp")}
-            onPress={() => router.navigate("(auth)/signUp")}
-          />
-        </View>
-      </SafeAreaView>
+  const storedPin = SecureStore.getItem("pin");
 
-      <Image source={bg} className="absolute w-screen bottom-0 z-[-10]" />
-    </>
-  );
+  if (!loggedIn) {
+    return <Redirect href="welcome" />;
+  }
+
+  if (loggedIn && !storedPin) {
+    return <Redirect href="createPinCode" />;
+  }
+
+  if (loggedIn) {
+    return <Redirect href="enterPinCode" />;
+  }
 }

@@ -1,10 +1,6 @@
-import { resources } from "@/utils/i18n";
+import { TranslationKeys, resources } from "@/utils/i18n";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { ScreenProps } from "expo-router/build/useScreens";
-
-type TranslationKeys =
-  | keyof (typeof resources)["en"]["translation"]
-  | keyof (typeof resources)["ar"]["translation"];
 
 type TTab = ScreenProps & {
   id: number;
@@ -30,7 +26,6 @@ export const tabs: TTab[] = [
     name: "portfolio",
     options: {
       title: "Portfolio",
-      headerShown: false,
       tabBarIcon: ({ color }: { color: string }) => (
         <Ionicons name="briefcase-outline" size={24} color={color} />
       ),
