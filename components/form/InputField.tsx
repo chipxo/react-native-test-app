@@ -1,12 +1,18 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { Control, FieldError } from "react-hook-form";
 import AntDesign from "@expo/vector-icons/build/AntDesign";
 import { cn } from "@/utils/cn";
 import { Colors } from "@/constants/Colors";
 import Input from "./Input";
 import { SignUpSchema } from "@/constants/formSchema";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { TranslationKeys } from "@/utils/i18n";
+import ErrorItem from "./ErrorItem";
 
 type InputFieldProps = {
+  name: "name" | "email" | "password";
+  labelName: TranslationKeys;
   error: FieldError | undefined;
   errorMessage: string | undefined;
   isPassword?: boolean;
@@ -14,49 +20,47 @@ type InputFieldProps = {
 };
 
 const InputField = ({
+  name,
+  labelName,
   error,
   errorMessage,
-  isPassword,
+  isPassword = false,
   control,
 }: InputFieldProps) => {
+  const { t } = useTranslation();
+
+  const [showPass, setShowPass] = useState(false);
+
   return (
     <View>
       {error && (
-        <>
-          <Text className="absolute -top-4 mb-2 pl-8 text-secondary-red">
-            {errorMessage}
-          </Text>
-          <View
-            className={cn(
-              "absolute top-[43]",
-              isPassword ? "right-16" : "right-8",
-            )}
-          >
-            <AntDesign
-              name="infocirlceo"
-              size={18}
-              color={Colors.secondaryRed}
-            />
-          </View>
-        </>
+        <ErrorItem errorMessage={errorMessage} isPassword={isPassword} />
       )}
-      <Text className="pl-8 text-tab-icon-default">{t("password")}</Text>
-      <Input
-        error={error}
-        name="password"
-        control={control}
-        secureTextEntry={showPass}
-      />
-      <Pressable
-        className="absolute right-8 top-10"
-        onPress={() => setShowPass((prev) => !prev)}
-      >
-        <AntDesign
-          name="eyeo"
-          size={24}
-          color={showPass ? Colors.secondaryGreen : Colors.primary}
+
+      <Text className="pl-8 text-tab-icon-default">{t(labelName)}</Text>
+      {isPassword ? (
+        <Input
+          error={error}
+          name={name}
+          control={control}
+          secureTextEntry={!showPass}
         />
-      </Pressable>
+      ) : (
+        <Input error={error} name={name} control={control} />
+      )}
+
+      {isPassword && (
+        <Pressable
+          className="absolute right-8 top-10"
+          onPress={() => setShowPass((prev) => !prev)}
+        >
+          <AntDesign
+            name="eyeo"
+            size={24}
+            color={showPass ? Colors.primary : Colors.secondaryGreen}
+          />
+        </Pressable>
+      )}
     </View>
   );
 };

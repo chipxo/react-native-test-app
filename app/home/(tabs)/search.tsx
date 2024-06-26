@@ -24,7 +24,7 @@ const Search = () => {
     debounce((value: string) => {
       setDebouncedText(value);
     }, 300),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -38,15 +38,15 @@ const Search = () => {
   });
 
   return (
-    <ScrollView className="bg-background min-h-screen">
-      <View className="pt-12 mx-4 relative pb-[79px]">
-        <Text className="text-[22px] font-bold mb-6">{t("Search")}</Text>
+    <ScrollView className="min-h-screen bg-background">
+      <View className="relative mx-4 pb-[79px] pt-12">
+        <Text className="mb-6 text-[22px] font-bold">{t("Search")}</Text>
         <TextInput
           onChangeText={(text) => setText(text)}
           value={text}
           placeholder={t("searchProducts")}
           placeholderTextColor={Colors.backBtn}
-          className="border border-secondary-grey/50 rounded-[16px] py-4 pl-10 text-[15px] text-secondary-grey mb-3"
+          className="mb-3 rounded-[16px] border border-secondary-grey/50 py-4 pl-10 text-[15px] text-secondary-grey"
         />
 
         <View className="absolute left-3 top-[114px]">
@@ -58,7 +58,7 @@ const Search = () => {
         {error && <Text>{t("error")}</Text>}
 
         {!isLoading && data?.length === 0 && (
-          <Text className="text-secondary-grey text-center text-[18px] pt-10">
+          <Text className="pt-4 text-center text-[18px] text-secondary-grey">
             {t("noProducts")}
           </Text>
         )}

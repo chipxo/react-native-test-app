@@ -6,13 +6,29 @@ import { useTranslation } from "react-i18next";
 import { Link, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import ProfileItem from "@/components/profile/ProfileItem";
+import { RootState, useAppDispatch } from "@/redux/store";
+import { logOut } from "@/redux/auth/authSlice";
+import * as SecureStore from "expo-secure-store";
+import { useSelector } from "react-redux";
+import { deleteUser } from "@/redux/user/userSlice";
 
 const Profile = () => {
   const { t } = useTranslation();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { name } = useSelector((state: RootState) => state.user);
+
+  const handleLogOut = async () => {
+    await SecureStore.deleteItemAsync("pin");
+    dispatch(logOut());
+    dispatch(deleteUser());
+    setTimeout(() => {
+      router.navigate("welcome");
+    }, 1000);
+  };
 
   return (
-    <View className="pt-14 bg-white min-h-screen">
+    <View className="min-h-screen bg-white pt-14">
       <View className="pl-2">
         <Ionicons
           name="chevron-back"
@@ -21,15 +37,15 @@ const Profile = () => {
           onPress={() => router.back()}
         />
       </View>
-      <View className="mx-4 pt-4 space-y-6">
+      <View className="mx-4 space-y-6 pt-4">
         <Text className="text-[22px] font-bold">{t("settings")}</Text>
-        <View className="border border-common-border rounded-[16px] px-4 py-6 flex-row items-center space-x-4">
-          <View className="rounded-full bg-profile-fallback h-8 w-8" />
-          <Text className="font-semibold">John Doe</Text>
+        <View className="flex-row items-center space-x-4 rounded-[16px] border border-common-border px-4 py-6">
+          <View className="h-8 w-8 rounded-full bg-profile-fallback" />
+          <Text className="font-semibold">{name}</Text>
         </View>
 
         <View>
-          <Text className="text-secondary-text mb-2">{t("basic")}</Text>
+          <Text className="mb-2 text-secondary-text">{t("basic")}</Text>
           <ProfileItem
             onPress={() => router.navigate("home/language")}
             icon={
@@ -48,9 +64,9 @@ const Profile = () => {
         </View>
 
         <View>
-          <Text className="text-secondary-text mb-2">{t("other")}</Text>
+          <Text className="mb-2 text-secondary-text">{t("other")}</Text>
           <ProfileItem
-            onPress={() => console.log("pressed")}
+            onPress={handleLogOut}
             icon={
               <View className="rotate-180">
                 <Ionicons

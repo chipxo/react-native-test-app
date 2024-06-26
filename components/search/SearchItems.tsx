@@ -13,8 +13,8 @@ const SearchItems = ({ data }: SearchItemsProps) => {
       keyExtractor={(item) => item.id.toString()}
       scrollEnabled={false}
       renderItem={({ item }) => (
-        <View className="bg-white w-full rounded-[16px] p-4 mb-2">
-          <Text className="font-semibold text-[15px]">ID: {item.id}</Text>
+        <View className="mb-2 w-full rounded-[16px] bg-white p-4">
+          <Text className="text-[15px] font-semibold">ID: {item.id}</Text>
           <Text>Name: {item.title}</Text>
         </View>
       )}
