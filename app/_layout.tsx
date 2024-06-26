@@ -2,7 +2,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { Stack, usePathname } from "expo-router";
 import { useEffect, useState } from "react";
-import { useRouter } from "expo-router";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { StatusBar } from "expo-status-bar";
 import { PersistGate } from "redux-persist/integration/react";

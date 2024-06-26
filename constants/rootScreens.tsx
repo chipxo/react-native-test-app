@@ -17,7 +17,7 @@ export const rootScreens = [
   {
     id: 3,
     name: "(auth)",
-    options: { headerShown: false },
+    options: { headerShown: false, gestureEnabled: false },
   },
   {
     id: 4,

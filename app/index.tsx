@@ -1,6 +1,5 @@
 import { RootState } from "@/redux/store";
 import "@/utils/i18n";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Redirect } from "expo-router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";

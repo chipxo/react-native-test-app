@@ -20,6 +20,7 @@ import Keychain from "react-native-keychain";
 import * as SecureStore from "expo-secure-store";
 import { Colors } from "@/constants/Colors";
 import { Redirect, useRouter } from "expo-router";
+import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
@@ -93,45 +94,7 @@ const enterPinCode = () => {
         </View>
 
         <View className="mt-52 flex-1 flex-row justify-around border-t border-profile-fallback pt-12">
-          <View className="gap-8">
-            <TouchableOpacity className="" onPress={() => handlePress("1")}>
-              <Text className="text-[28px] font-bold">1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="" onPress={() => handlePress("4")}>
-              <Text className="text-[28px] font-bold">4</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="" onPress={() => handlePress("7")}>
-              <Text className="text-[28px] font-bold">7</Text>
-            </TouchableOpacity>
-          </View>
-          <View className="gap-8">
-            <TouchableOpacity className="" onPress={() => handlePress("2")}>
-              <Text className="text-[28px] font-bold">2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="" onPress={() => handlePress("5")}>
-              <Text className="text-[28px] font-bold">5</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="" onPress={() => handlePress("8")}>
-              <Text className="text-[28px] font-bold">8</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="" onPress={() => handlePress("0")}>
-              <Text className="text-[28px] font-bold">0</Text>
-            </TouchableOpacity>
-          </View>
-          <View className="gap-8">
-            <TouchableOpacity className="" onPress={() => handlePress("3")}>
-              <Text className="text-center text-[28px] font-bold">3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="" onPress={() => handlePress("6")}>
-              <Text className="text-center text-[28px] font-bold">6</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="" onPress={() => handlePress("9")}>
-              <Text className="text-center text-[28px] font-bold">9</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleDelete} className="">
-              <Feather name="delete" size={24} color="black" />
-            </TouchableOpacity>
-          </View>
+          <NumKeyBoard handleDelete={handleDelete} handlePress={handlePress} />
         </View>
       </View>
       <BottomButton onPress={handleContinue} title={t("continue")} />
