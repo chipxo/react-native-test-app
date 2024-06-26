@@ -28,5 +28,8 @@
   "changeAcc": "Change account",
   "enterCode": "enter {{count}} digit code",
   "createCode": "Create a Pin code",
-  "repeatCode": "Repeat a Pin code"
+  "repeatCode": "Repeat a Pin code",
+  "searchProducts": "Search Products...",
+  "noProducts": "No results found",
+  "error": "An error occurred"
 }

@@ -22,6 +22,7 @@ const HomePage = () => {
     queryKey: ["posts", query],
     queryFn: () => useFetch(query),
   });
+  console.log("home data", data);
 
   if (!loggedIn) {
     return <Redirect href="welcome" />;

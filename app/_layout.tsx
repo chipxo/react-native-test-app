@@ -20,6 +20,8 @@ export default function RootLayout() {
 
   const curPath = pathname.split("/").at(-1);
 
+  const curPath = pathname.split("/").at(-1);
+
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
