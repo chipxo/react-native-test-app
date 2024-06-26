@@ -9,4 +9,4 @@ export const signUpSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-export type TSignUpSchema = z.infer<typeof signUpSchema>;
+export type SignUpSchema = z.infer<typeof signUpSchema>;
