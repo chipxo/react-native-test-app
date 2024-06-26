@@ -20,11 +20,11 @@ const Profile = () => {
 
   const handleLogOut = async () => {
     await SecureStore.deleteItemAsync("pin");
+
     dispatch(logOut());
     dispatch(deleteUser());
-    setTimeout(() => {
-      router.navigate("welcome");
-    }, 1000);
+
+    router.push("welcome");
   };
 
   return (
@@ -47,7 +47,7 @@ const Profile = () => {
         <View>
           <Text className="mb-2 text-secondary-text">{t("basic")}</Text>
           <ProfileItem
-            onPress={() => router.navigate("home/language")}
+            onPress={() => router.push("home/language")}
             icon={
               <View className="rotate-180">
                 <Ionicons

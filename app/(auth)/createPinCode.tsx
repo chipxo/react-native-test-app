@@ -20,6 +20,7 @@ import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
+import * as LocalAuthentication from "expo-local-authentication";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ const enterPinCode = () => {
         try {
           await SecureStore.setItemAsync("pin", pin);
           setPin("");
-          router.navigate("home");
+          router.push("home");
         } catch (error) {
           alert("Error while creating password");
           setPin("");
