@@ -26,7 +26,6 @@ export const tabs: TTab[] = [
     name: "portfolio",
     options: {
       title: "Portfolio",
-      headerShown: false,
       tabBarIcon: ({ color }: { color: string }) => (
         <Ionicons name="briefcase-outline" size={24} color={color} />
       ),

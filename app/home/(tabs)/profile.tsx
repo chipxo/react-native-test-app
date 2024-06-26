@@ -6,17 +6,25 @@ import { useTranslation } from "react-i18next";
 import { Link, useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import ProfileItem from "@/components/profile/ProfileItem";
-import { useAppDispatch } from "@/redux/store";
+import { RootState, useAppDispatch } from "@/redux/store";
 import { logOut } from "@/redux/auth/authSlice";
+import * as SecureStore from "expo-secure-store";
+import { useSelector } from "react-redux";
+import { deleteUser } from "@/redux/user/userSlice";
 
 const Profile = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { name } = useSelector((state: RootState) => state.user);
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
+    await SecureStore.deleteItemAsync("pin");
     dispatch(logOut());
-    router.navigate("welcome");
+    dispatch(deleteUser());
+    setTimeout(() => {
+      router.navigate("welcome");
+    }, 1000);
   };
 
   return (
@@ -33,7 +41,7 @@ const Profile = () => {
         <Text className="text-[22px] font-bold">{t("settings")}</Text>
         <View className="flex-row items-center space-x-4 rounded-[16px] border border-common-border px-4 py-6">
           <View className="h-8 w-8 rounded-full bg-profile-fallback" />
-          <Text className="font-semibold">John Doe</Text>
+          <Text className="font-semibold">{name}</Text>
         </View>
 
         <View>

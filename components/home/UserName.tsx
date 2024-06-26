@@ -5,19 +5,19 @@ import bgImage from "@/assets/images/home/bg.png";
 import { StatusBar } from "expo-status-bar";
 
 type UserNameProps = {
-  userName: string;
+  userName: string | undefined;
 };
 
 const UserName = ({ userName = "John doe" }: UserNameProps) => {
   const { t } = useTranslation();
 
   return (
-    <View className="min-h-[296] rounded-b-[28] justify-center items-center">
-      <View className="absolute top-0 w-screen ">
+    <View className="min-h-[296] items-center justify-center rounded-b-[28]">
+      <View className="absolute top-0 w-screen">
         <ImageBackground
           source={bgImage}
           resizeMode="stretch"
-          className="w-full h-[296]"
+          className="h-[296] w-full"
         />
       </View>
 

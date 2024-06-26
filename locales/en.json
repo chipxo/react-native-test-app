@@ -24,5 +24,9 @@
   "name": "Name",
   "email": "E-mail",
   "password": "Password",
-  "crAcc": "Create account"
+  "crAcc": "Create account",
+  "changeAcc": "Change account",
+  "enterCode": "enter {{count}} digit code",
+  "createCode": "Create a Pin code",
+  "repeatCode": "Repeat a Pin code"
 }

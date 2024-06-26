@@ -45,6 +45,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { logIn } from "@/redux/auth/authSlice";
 import { useSelector } from "react-redux";
+import { createUser } from "@/redux/user/userSlice";
 
 const SignUp = () => {
   const router = useRouter();
@@ -70,11 +71,14 @@ const SignUp = () => {
         setTimeout(() => {
           reset();
         }, 1000);
+      console.log(authResponse);
+
+      dispatch(createUser(authResponse));
       dispatch(logIn());
-      router.push("enterPinCode");
+      router.push("createPinCode");
     } catch (e) {
       console.log("Error while auth: ", e);
-      console.warn("Wrong user name or e-mail");
+      alert("Wrong user name or e-mail");
     }
   };
   if (loggedIn) {

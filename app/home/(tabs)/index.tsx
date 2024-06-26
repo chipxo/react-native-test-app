@@ -12,6 +12,8 @@ import { Redirect } from "expo-router";
 
 const HomePage = () => {
   const { loggedIn } = useSelector((state: RootState) => state.auth);
+  const { name } = useSelector((state: RootState) => state.user);
+
   const { t } = useTranslation();
 
   const query = "?_limit=3";
@@ -37,7 +39,7 @@ const HomePage = () => {
     <View className="bg-background">
       <ScrollView>
         <View className="min-h-screen space-y-6">
-          <UserName userName="John Doe" />
+          <UserName userName={name} />
 
           <View className="space-y-8">
             <View>

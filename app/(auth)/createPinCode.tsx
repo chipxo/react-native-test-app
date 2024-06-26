@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   Button,
   TouchableOpacity,
-  Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -15,18 +14,19 @@ import { useTranslation } from "react-i18next";
 import BackIcon from "@/components/navigation/BackIcon";
 import { cn } from "@/utils/cn";
 import BottomButton from "@/components/BottomButton";
-import { Feather } from "@expo/vector-icons";
 import Keychain from "react-native-keychain";
 import * as SecureStore from "expo-secure-store";
+import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
-import { Redirect, useRouter } from "expo-router";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
   const [pin, setPin] = useState("");
+  const [pinToRepeat, setPinToRepeat] = useState("");
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const { email } = useSelector((state: RootState) => state.user);
+
+  const storedPin = SecureStore.getItem("pin");
 
   const handlePress = (value: string) => {
     if (pin.length < 5) {
@@ -38,47 +38,61 @@ const enterPinCode = () => {
     setPin((prevPin) => prevPin.slice(0, -1));
   };
 
-  const storedPin = SecureStore.getItem("pin");
-
   const handleContinue = async () => {
-    console.log(storedPin);
-    if (pin === storedPin) router.navigate("home");
+    if (pin.length < 5) {
+      setPin("");
+      alert("Enter 5 digits");
+    }
 
-    if (pin.length === 5 && pin !== storedPin) {
-      alert("Passwords don't match");
+    if (pin.length === 5 && !pinToRepeat) {
+      setPinToRepeat(pin);
       setPin("");
     }
 
-    if (pin.length < 5) alert("Enter 5 digits");
-  };
+    if (pin.length === 5 && pinToRepeat) {
+      if (pin === pinToRepeat) {
+        try {
+          await SecureStore.setItemAsync("pin", pin);
+          setPin("");
+          router.navigate("home");
+        } catch (error) {
+          alert("Error while creating password");
+          setPin("");
+        }
+      }
 
-  if (!storedPin) {
-    return <Redirect href="createPinCode" />;
-  }
+      if (pin !== pinToRepeat) {
+        alert("Pins don't match");
+        setPin("");
+      }
+    }
+  };
 
   return (
     <>
+      <BackIcon />
       <View className="flex-1 bg-white pt-20">
         <View>
-          <View className="mx-auto mb-3 h-[48] w-[48] items-center justify-center rounded-full border border-secondary-green-muted bg-secondary-green-muted/40">
+          <View className="mx-auto mb-6 h-[48] w-[48] items-center justify-center rounded-full border border-secondary-green-muted bg-secondary-green-muted/40">
             <Feather
               name="smartphone"
               size={24}
               color={Colors.secondaryGreen}
             />
           </View>
-          <Text className="text-center text-[15px] font-semibold">{email}</Text>
-
-          <Pressable className="mt-2">
-            <Text className="text-center text-[15px] font-semibold text-primary">
-              {t("changeAcc")}
-            </Text>
-          </Pressable>
-
-          <Text className="mt-8 text-center text-secondary-grey">
-            {t("enterCode", { count: 5 })}:
+          <Text className="text-center font-semibold">
+            {t(pinToRepeat ? "repeatCode" : "createCode")}
           </Text>
 
+          {/* <Text>{`passToRepeat ${pinToRepeat}`}</Text>
+
+          <Text>{`storedPin ${storedPin}`}</Text>
+
+          <Text>{`pin ${pin}`}</Text> */}
+
+          <Text className="mt-8 text-center text-secondary-grey">
+            {t("enterCode", { count: 5 })}
+          </Text>
           <View className="flex-row justify-center gap-3 pt-5">
             {[...Array(5)].map((_, index) => (
               <View

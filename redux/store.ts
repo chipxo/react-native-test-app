@@ -5,16 +5,18 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import authReducer from "./auth/authSlice";
 import langReducer from "./lan/languageSlice";
+import userSlice from "./user/userSlice";
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["lang", "auth"],
+  whitelist: ["lang", "auth", "user"],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   lang: langReducer,
+  user: userSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
