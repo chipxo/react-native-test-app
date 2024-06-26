@@ -6,16 +6,24 @@ import Posts from "@/components/home/Posts";
 import { useQuery } from "@tanstack/react-query";
 import { useFetch } from "@/hooks/useFetch";
 import { useTranslation } from "react-i18next";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { Redirect } from "expo-router";
 
 const HomePage = () => {
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
 
-  const query = "?limit=3";
+  const query = "?_limit=3";
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["posts", query],
     queryFn: () => useFetch(query),
   });
+
+  if (!loggedIn) {
+    return <Redirect href="welcome" />;
+  }
 
   if (isLoading) {
     return <ActivityIndicator size="large" />;

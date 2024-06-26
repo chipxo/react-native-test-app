@@ -12,6 +12,7 @@
   "comments": "Comments",
   "back": "Back",
   "signIn": "Sign In",
+  "login": "Login",
   "signUp": "Sign up",
   "continue": "Continue",
   "settings": "Settings",
@@ -22,5 +23,6 @@
   "persAcc": "Personal Account",
   "name": "Name",
   "email": "E-mail",
-  "password": "Password"
+  "password": "Password",
+  "crAcc": "Create account"
 }

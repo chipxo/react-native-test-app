@@ -13,7 +13,7 @@ const FormHeader = ({ isSignUp = false }) => {
       </View>
       <View>
         <Text className="mb-1 font-semibold">
-          {t(isSignUp ? "signUp" : "signIn")}
+          {t(isSignUp ? "signUp" : "login")}
         </Text>
         <Text className="text-secondary-grey">{t("persAcc")}</Text>
       </View>

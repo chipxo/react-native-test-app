@@ -1,46 +1,30 @@
-import {
-  View,
-  SafeAreaView,
-  Button,
-  FlatList,
-  ImageBackground,
-  Image,
-} from "react-native";
-import BgImg from "@/components/BgImg";
-import { items } from "@/constants/WelcomeItems";
-import { Colors } from "@/constants/Colors";
-import { Link, useRouter } from "expo-router";
-import WelcomeItems from "@/components/welcome/WelcomeItems";
-import CommonButton from "@/components/CommonButton";
-import { t } from "i18next";
+import { RootState } from "@/redux/store";
 import "@/utils/i18n";
-import bg from "@/assets/images/bg.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Redirect } from "expo-router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-export default function WelcomeScreen() {
-  const router = useRouter();
-  return (
-    <>
-      <SafeAreaView>
-        <View>
-          <WelcomeItems items={items} />
+export default function HomeScreen() {
+  const { loggedIn } = useSelector((state: RootState) => state.auth);
+  // useEffect(() => {
+  //   const getLang = async () => {
+  //     try {
+  //       const value = await AsyncStorage.getItem("lang");
+  //       console.log(value);
+  //       if (value !== null) {
+  //         // We have data!!
+  //       }
+  //     } catch (error) {
+  //       // Error retrieving data
+  //     }
+  //   };
+  //   console.log(loggedIn);
+  // }, []);
 
-          <View className="mx-6 mt-[100px] rounded-[16px] py-2">
-            <Button
-              title={t("signIn")}
-              color={Colors.primary}
-              accessibilityLabel={t("signIn")}
-              onPress={() => router.navigate("(auth)/signIn")}
-            />
-          </View>
+  if (!loggedIn) {
+    return <Redirect href="welcome" />;
+  }
 
-          <CommonButton
-            title={t("signUp")}
-            onPress={() => router.navigate("(auth)/signUp")}
-          />
-        </View>
-      </SafeAreaView>
-
-      <Image source={bg} className="absolute w-screen bottom-0 z-[-10]" />
-    </>
-  );
+  return <Redirect href="enterPinCode" />;
 }

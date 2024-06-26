@@ -40,10 +40,9 @@ import ErrorItem from "@/components/form/ErrorItem";
 import InputField from "@/components/form/InputField";
 import FormHeader from "@/components/form/FormHeader";
 import { useRouter } from "expo-router";
+import BackIcon from "@/components/navigation/BackIcon";
 
 const SignUp = () => {
-  const router = useRouter();
-
   const {
     control,
     handleSubmit,
@@ -62,12 +61,8 @@ const SignUp = () => {
   return (
     <>
       <Image source={bg} className="absolute top-0 z-[-10] w-screen" />
-      <Pressable
-        onPress={() => router.back()}
-        className="absolute left-2 top-14 z-10"
-      >
-        <Ionicons name="chevron-back" size={24} color={Colors.black} />
-      </Pressable>
+      <BackIcon />
+
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1 bg-transparent"
@@ -80,19 +75,22 @@ const SignUp = () => {
 
               <View>
                 <InputField
-                  name={"name"}
+                  name="name"
+                  labelName="name"
                   error={errors.name}
                   errorMessage={errors.name?.message}
                   control={control}
                 />
                 <InputField
-                  name={"email"}
+                  name="email"
+                  labelName="email"
                   error={errors.email}
                   errorMessage={errors.email?.message}
                   control={control}
                 />
                 <InputField
-                  name={"password"}
+                  name="password"
+                  labelName="password"
                   error={errors.password}
                   errorMessage={errors.password?.message}
                   control={control}

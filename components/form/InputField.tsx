@@ -11,7 +11,8 @@ import { TranslationKeys } from "@/utils/i18n";
 import ErrorItem from "./ErrorItem";
 
 type InputFieldProps = {
-  name: TranslationKeys;
+  name: "name" | "email" | "password";
+  labelName: TranslationKeys;
   error: FieldError | undefined;
   errorMessage: string | undefined;
   isPassword?: boolean;
@@ -20,6 +21,7 @@ type InputFieldProps = {
 
 const InputField = ({
   name,
+  labelName,
   error,
   errorMessage,
   isPassword = false,
@@ -31,17 +33,22 @@ const InputField = ({
 
   return (
     <View>
-      {error && <ErrorItem errorMessage={errorMessage} />}
+      {error && (
+        <ErrorItem errorMessage={errorMessage} isPassword={isPassword} />
+      )}
 
-      <Text className="pl-8 text-tab-icon-default">{t(name)}</Text>
+      <Text className="pl-8 text-tab-icon-default">{t(labelName)}</Text>
+      {isPassword ? (
+        <Input
+          error={error}
+          name={name}
+          control={control}
+          secureTextEntry={!showPass}
+        />
+      ) : (
+        <Input error={error} name={name} control={control} />
+      )}
 
-      <Input
-        error={error}
-        name="password"
-        control={control}
-        secureTextEntry={showPass}
-      />
-      
       {isPassword && (
         <Pressable
           className="absolute right-8 top-10"
@@ -50,7 +57,7 @@ const InputField = ({
           <AntDesign
             name="eyeo"
             size={24}
-            color={showPass ? Colors.secondaryGreen : Colors.primary}
+            color={showPass ? Colors.primary : Colors.secondaryGreen}
           />
         </Pressable>
       )}

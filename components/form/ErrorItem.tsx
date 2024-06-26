@@ -9,7 +9,7 @@ type ErrorItemProps = {
   isPassword?: boolean;
 };
 
-const ErrorItem = ({ errorMessage, isPassword }: ErrorItemProps) => {
+const ErrorItem = ({ errorMessage, isPassword = false }: ErrorItemProps) => {
   return (
     <>
       <Text className="absolute -top-4 mb-2 pl-8 text-secondary-red">

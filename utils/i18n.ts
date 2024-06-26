@@ -2,6 +2,8 @@ import i18n, { t } from "i18next";
 import { initReactI18next } from "react-i18next";
 import en from "@/locales/en.json";
 import ar from "@/locales/ar.json";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { store } from "@/redux/store";
 
 export type TranslationKeys =
   | keyof (typeof resources)["en"]["translation"]
@@ -18,7 +20,7 @@ export const resources = {
 
 i18n.use(initReactI18next).init({
   compatibilityJSON: "v3",
-  lng: "en",
+  lng: store.getState().lang.lan,
   fallbackLng: "en",
   resources,
 
