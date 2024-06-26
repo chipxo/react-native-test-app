@@ -30,23 +30,19 @@ export default function WelcomeScreen() {
       <SafeAreaView>
         <View>
           <WelcomeItems items={items} />
-          {/* <Link href="(auth)/enterPinCode">pin code</Link>
-          <Link href="home/(tabs)/profile">profile</Link> */}
+
           <View className="mx-6 mt-[100px] rounded-[16px] py-2">
             <Button
               title={t("signIn")}
               color={Colors.primary}
               accessibilityLabel={t("signIn")}
-              onPress={() => router.navigate("(auth)/signIn")}
+              onPress={() => router.push("(auth)/signIn")}
             />
           </View>
-          {/* <Text>
-            {t("continue")} {store.getState().lang.lan}
-          </Text> */}
 
           <CommonButton
             title={t("signUp")}
-            onPress={() => router.navigate("(auth)/signUp")}
+            onPress={() => router.push("(auth)/signUp")}
           />
         </View>
       </SafeAreaView>

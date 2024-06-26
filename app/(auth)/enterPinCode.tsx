@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { setLanguage } from "@/redux/lan/languageSlice";
@@ -21,6 +21,7 @@ import * as SecureStore from "expo-secure-store";
 import { Colors } from "@/constants/Colors";
 import { Redirect, useRouter } from "expo-router";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
+import * as LocalAuthentication from "expo-local-authentication";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ const enterPinCode = () => {
 
   const handleContinue = async () => {
     console.log(storedPin);
-    if (pin === storedPin) router.navigate("home");
+    if (pin === storedPin) router.push("home");
 
     if (pin.length === 5 && pin !== storedPin) {
       alert("Passwords don't match");
@@ -57,6 +58,37 @@ const enterPinCode = () => {
     return <Redirect href="createPinCode" />;
   }
 
+  const authenticate = async () => {
+    const hasHardware = await LocalAuthentication.hasHardwareAsync();
+    const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+
+    if (hasHardware && isEnrolled) {
+      const result = await LocalAuthentication.authenticateAsync({
+        promptMessage: "Authenticate with Face ID",
+      });
+
+      if (result.success) {
+        router.push("home");
+      } else {
+        alert("Authentication failed. Please enter your PIN.");
+      }
+    }
+  };
+
+  // useEffect(() => {
+  //   authenticate();
+  // }, []);
+  useEffect(() => {
+    const auth = async () => {
+      const { success } = await LocalAuthentication.authenticateAsync();
+      if (success) {
+        setTimeout(() => setPin(storedPin), 400);
+        setTimeout(() => router.push("home"), 800);
+      }
+    };
+
+    auth();
+  }, []);
   return (
     <>
       <View className="flex-1 bg-white pt-20">
