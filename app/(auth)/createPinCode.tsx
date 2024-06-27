@@ -42,7 +42,6 @@ const enterPinCode = () => {
         try {
           await SecureStore.setItemAsync("pin", pin);
           setTimeout(() => router.push("home"), 800);
-          setPin("");
         } catch (error) {
           alert("Error while creating password");
           setPin("");

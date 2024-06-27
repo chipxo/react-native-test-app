@@ -53,6 +53,7 @@ const SignIn = () => {
     } catch (e) {
       console.log("Error while auth: ", e);
       alert("Wrong user name or e-mail");
+      reset();
     }
   };
 

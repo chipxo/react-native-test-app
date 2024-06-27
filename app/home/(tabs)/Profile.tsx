@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
 import { useTranslation } from "react-i18next";
@@ -10,9 +10,10 @@ import { RootState, useAppDispatch } from "@/redux/store";
 import { logOut } from "@/redux/auth/authSlice";
 import * as SecureStore from "expo-secure-store";
 import { useSelector } from "react-redux";
-import { deleteUser } from "@/redux/user/userSlice";
+import { createUser, deleteUser } from "@/redux/user/userSlice";
+import { getCurrentUser } from "@/utils/getCurrentUser";
 
-const Profile = () => {
+export const Profile = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -27,6 +28,25 @@ const Profile = () => {
       router.push("welcome");
     }, 600);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await setupAxiosInterceptor();
+        const { accessToken } = await getTokens();
+
+        const user = await getCurrentUser(accessToken);
+
+        if (user) {
+          dispatch(createUser(user));
+        }
+      } catch (e) {
+        console.log("Failed to fetch user data: ", e);
+      }
+    };
+
+    fetchData();
+  }, [dispatch]);
 
   return (
     <View className="min-h-screen bg-white pt-14">
@@ -86,5 +106,3 @@ const Profile = () => {
     </View>
   );
 };
-
-export default Profile;

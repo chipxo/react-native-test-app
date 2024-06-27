@@ -1,4 +1,10 @@
-import { View, Text, ScrollView, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
 import TestTask from "@/components/home/TestTask";
 import BeforeStart from "@/components/home/BeforeStart";
 import UserName from "@/components/home/UserName";
@@ -9,18 +15,18 @@ import { useTranslation } from "react-i18next";
 import { RootState, useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { Redirect } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setupAxiosInterceptor } from "@/utils/setupAxiosInterceptor";
 import { getTokens } from "@/utils/getTokens";
-import { createUser } from "@/redux/user/userSlice";
+import { User, createUser } from "@/redux/user/userSlice";
 import { getCurrentUser } from "@/utils/getCurrentUser";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const { loggedIn } = useSelector((state: RootState) => state.auth);
   const { name } = useSelector((state: RootState) => state.user);
-
   const { t } = useTranslation();
+  const [refreshedUser, setRefreshedUser] = useState<User | null>(null);
 
   const query = "?_limit=3";
 
@@ -29,18 +35,6 @@ const HomePage = () => {
     queryFn: () => useFetch(query),
   });
 
-  if (!loggedIn) {
-    return <Redirect href="welcome" />;
-  }
-
-  if (isLoading) {
-    return <ActivityIndicator size="large" />;
-  }
-
-  if (error) {
-    return <Text>An error occured</Text>;
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,15 +42,48 @@ const HomePage = () => {
         const { accessToken } = await getTokens();
 
         const user = await getCurrentUser(accessToken);
-
-        dispatch(createUser(user));
-      } catch (e) {
-        console.log("Failed to fetch user data: ", e);
+        setRefreshedUser(user);
+      } catch (error) {
+        console.log("Failed to fetch user data: ", error);
       }
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (refreshedUser) {
+      dispatch(createUser(refreshedUser));
+    }
+  }, [dispatch]);
+
+  if (!refreshedUser) {
+    return (
+      <SafeAreaView>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
+
+  if (!loggedIn) {
+    return <Redirect href="welcome" />;
+  }
+
+  if (isLoading) {
+    return (
+      <SafeAreaView>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView>
+        <Text>An error occured</Text>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <View className="bg-background">
