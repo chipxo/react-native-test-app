@@ -1,9 +1,8 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
 import { useTranslation } from "react-i18next";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import ProfileItem from "@/components/profile/ProfileItem";
 import { RootState, useAppDispatch } from "@/redux/store";
@@ -21,10 +20,11 @@ const Profile = () => {
   const handleLogOut = async () => {
     await SecureStore.deleteItemAsync("pin");
 
-    dispatch(logOut());
-    dispatch(deleteUser());
-
-    router.push("welcome");
+    setTimeout(() => {
+      dispatch(logOut());
+      dispatch(deleteUser());
+      router.push("welcome");
+    }, 600);
   };
 
   return (
@@ -38,14 +38,23 @@ const Profile = () => {
         />
       </View>
       <View className="mx-4 space-y-6 pt-4">
-        <Text className="text-[22px] font-bold">{t("settings")}</Text>
+        <Text style={{ fontFamily: "Inter" }} className="text-[22px] font-bold">
+          {t("settings")}
+        </Text>
         <View className="flex-row items-center space-x-4 rounded-[16px] border border-common-border px-4 py-6">
           <View className="h-8 w-8 rounded-full bg-profile-fallback" />
-          <Text className="font-semibold">{name}</Text>
+          <Text style={{ fontFamily: "Inter" }} className="font-semibold">
+            {name}
+          </Text>
         </View>
 
         <View>
-          <Text className="mb-2 text-secondary-text">{t("basic")}</Text>
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="mb-2 text-secondary-text"
+          >
+            {t("basic")}
+          </Text>
           <ProfileItem
             onPress={() => router.push("home/language")}
             icon={
@@ -59,12 +68,22 @@ const Profile = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <Text className="border font-semibold">{t("language")}</Text>
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
+              {t("language")}
+            </Text>
           </ProfileItem>
         </View>
 
         <View>
-          <Text className="mb-2 text-secondary-text">{t("other")}</Text>
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="mb-2 text-secondary-text"
+          >
+            {t("other")}
+          </Text>
           <ProfileItem
             onPress={handleLogOut}
             icon={
@@ -78,7 +97,12 @@ const Profile = () => {
             }
           >
             <Ionicons name="log-out-outline" size={24} color={Colors.primary} />
-            <Text className="border font-semibold">{t("logOut")}</Text>
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
+              {t("logOut")}
+            </Text>
           </ProfileItem>
         </View>
       </View>

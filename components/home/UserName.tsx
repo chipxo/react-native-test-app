@@ -1,8 +1,7 @@
-import { View, Text, Image, ImageBackground } from "react-native";
+import { View, ImageBackground, Text } from "react-native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import bgImage from "@/assets/images/home/bg.png";
-import { StatusBar } from "expo-status-bar";
 
 type UserNameProps = {
   userName: string | undefined;
@@ -21,8 +20,15 @@ const UserName = ({ userName = "John doe" }: UserNameProps) => {
         />
       </View>
 
-      <Text className="text-white">{t("yourName")}</Text>
-      <Text className="text-[28px] font-semibold text-white">{userName}</Text>
+      <Text style={{ fontFamily: "Inter" }} className="text-white">
+        {t("yourName")}
+      </Text>
+      <Text
+        style={{ fontFamily: "Inter" }}
+        className="text-[28px] font-semibold text-white"
+      >
+        {userName}
+      </Text>
     </View>
   );
 };

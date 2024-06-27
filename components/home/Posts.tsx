@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Pressable } from "react-native";
+import { View, FlatList, Pressable, Text } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
 
@@ -22,11 +22,17 @@ const Posts = ({ posts }: PostsProps) => {
         scrollEnabled={false}
         renderItem={({ item }) => (
           <Link href={`home/${item.id}`} asChild>
-            <Pressable className="bg-white my-2 p-3 rounded-[16px] space-y-2 ">
-              <Text className="text-[18px] font-semibold">
+            <Pressable className="my-2 space-y-2 rounded-[16px] bg-white p-3">
+              <Text
+                style={{ fontFamily: "Inter" }}
+                className="text-[18px] font-semibold"
+              >
                 {item.title[0].toUpperCase() + item.title.slice(1)}
               </Text>
-              <Text className="text-secondary-text text-[18px]">
+              <Text
+                style={{ fontFamily: "Inter" }}
+                className="text-[18px] text-secondary-text"
+              >
                 {item.body[0].toUpperCase() + item.body.slice(1)}
               </Text>
             </Pressable>

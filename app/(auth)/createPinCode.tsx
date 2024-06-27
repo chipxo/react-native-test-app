@@ -1,34 +1,21 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Button,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RootState, useAppDispatch } from "@/redux/store";
-import { setLanguage } from "@/redux/lan/languageSlice";
-import { useSelector } from "react-redux";
+import { Text, View } from "react-native";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import BackIcon from "@/components/navigation/BackIcon";
-import { cn } from "@/utils/cn";
 import BottomButton from "@/components/BottomButton";
-import Keychain from "react-native-keychain";
 import * as SecureStore from "expo-secure-store";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
-import * as LocalAuthentication from "expo-local-authentication";
+import PinCodeIndicator from "@/components/pinCode/PinCodeIndicator";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
-  const [pin, setPin] = useState("");
-  const [pinToRepeat, setPinToRepeat] = useState("");
   const router = useRouter();
 
-  const storedPin = SecureStore.getItem("pin");
+  const [pin, setPin] = useState("");
+  const [pinToRepeat, setPinToRepeat] = useState("");
 
   const handlePress = (value: string) => {
     if (pin.length < 5) {
@@ -55,8 +42,7 @@ const enterPinCode = () => {
       if (pin === pinToRepeat) {
         try {
           await SecureStore.setItemAsync("pin", pin);
-          setPin("");
-          router.push("home");
+          setTimeout(() => router.push("home"), 800);
         } catch (error) {
           alert("Error while creating password");
           setPin("");
@@ -82,24 +68,22 @@ const enterPinCode = () => {
               color={Colors.secondaryGreen}
             />
           </View>
-          <Text className="text-center font-semibold">
+
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="text-center font-semibold"
+          >
             {t(pinToRepeat ? "repeatCode" : "createCode")}
           </Text>
 
-          <Text className="mt-8 text-center text-secondary-grey">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="mt-8 text-center text-secondary-grey"
+          >
             {t("enterCode", { count: 5 })}
           </Text>
-          <View className="flex-row justify-center gap-3 pt-5">
-            {[...Array(5)].map((_, index) => (
-              <View
-                key={index}
-                className={cn(
-                  "h-6 w-6 rounded-full",
-                  index < pin.length ? "bg-primary" : "bg-profile-fallback",
-                )}
-              />
-            ))}
-          </View>
+
+          <PinCodeIndicator length={pin.length} />
         </View>
 
         <View className="mt-52 flex-1 flex-row justify-around border-t border-profile-fallback pt-12">

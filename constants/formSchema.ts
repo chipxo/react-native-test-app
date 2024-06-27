@@ -1,13 +1,15 @@
+import { t } from "i18next";
 import { z } from "zod";
+import "@/utils/i18n";
 
 export const signUpSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  name: z.string().min(2, { message: t("nameReq") }),
   email: z
     .string()
-    .min(4, { message: "Email must be at least 4 characters" })
-    .email({ message: "Must be a valid email" })
+    .min(4, { message: t("emailReq") })
+    .email({ message: t("emailValid") })
     .optional(),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  password: z.string().min(8, t("passReq")),
 });
 
 export type SignUpSchema = z.infer<typeof signUpSchema>;

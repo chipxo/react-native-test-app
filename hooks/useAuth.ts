@@ -1,29 +1,22 @@
-import axios from "axios";
-import { z } from "zod";
+import { User } from "@/redux/user/userSlice";
+import { axiosInstance } from "@/utils/axiosInstance";
+import { AxiosResponse } from "axios";
 
-type User = {
+type UserLogin = {
   name: string;
   password: string;
 };
 
-export const useAuth = async ({ name, password }: User) => {
-  const url = "https://dummyjson.com/auth/login";
-  const user = {
-    username: name,
-    password: password,
-  };
-  const headers = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
+export const useAuth = async ({ name, password }: UserLogin): Promise<User> => {
   try {
-    const { data } = await axios.post(url, user, headers);
-    console.log(data);
+    const { data }: AxiosResponse<User> = await axiosInstance.post("/login", {
+      username: name,
+      password: password,
+      expiresInMins: 30,
+    });
 
     return data;
-  } catch (e) {
-    console.error("Error in:", e);
+  } catch (error) {
+    throw new Error("Failed to login");
   }
 };

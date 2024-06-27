@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   View,
-  Text,
-  FlatList,
   TextInput,
   ActivityIndicator,
   ScrollView,
+  Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { EvilIcons } from "@expo/vector-icons";
@@ -40,7 +39,12 @@ const Search = () => {
   return (
     <ScrollView className="min-h-screen bg-background">
       <View className="relative mx-4 pb-[79px] pt-12">
-        <Text className="mb-6 text-[22px] font-bold">{t("Search")}</Text>
+        <Text
+          style={{ fontFamily: "Inter" }}
+          className="mb-6 text-[22px] font-bold"
+        >
+          {t("Search")}
+        </Text>
         <TextInput
           onChangeText={(text) => setText(text)}
           value={text}
@@ -55,10 +59,13 @@ const Search = () => {
 
         {isLoading && <ActivityIndicator />}
 
-        {error && <Text>{t("error")}</Text>}
+        {error && <Text style={{ fontFamily: "Inter" }}>{t("error")}</Text>}
 
         {!isLoading && data?.length === 0 && (
-          <Text className="pt-4 text-center text-[18px] text-secondary-grey">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="pt-4 text-center text-[18px] text-secondary-grey"
+          >
             {t("noProducts")}
           </Text>
         )}

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList, Text } from "react-native";
 
 type Comment = {
   postId: number;
@@ -17,19 +17,34 @@ const Comments = ({ comments }: CommentsProps) => {
   const { t } = useTranslation();
 
   return (
-    <View className="pb-[100] mt-6">
-      <Text className="mb-2 text-secondary-grey">{t("comments")}</Text>
+    <View className="mt-6 pb-[100]">
+      <Text
+        style={{ fontFamily: "Inter" }}
+        className="mb-2 text-secondary-grey"
+      >
+        {t("comments")}
+      </Text>
       <FlatList
         data={comments}
         keyExtractor={(item) => item.name}
         scrollEnabled={false}
         renderItem={({ item }) => (
-          <View className="bg-white p-4 rounded-[16px] mb-4">
-            <Text className="my-2 text-[18px] font-semibold">{item.name}</Text>
-            <Text className="my-2 text-[16px] text-secondary-text">
+          <View className="mb-4 rounded-[16px] bg-white p-4">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="my-2 text-[18px] font-semibold"
+            >
+              {item.name}
+            </Text>
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="my-2 text-[16px] text-secondary-text"
+            >
               {item.email}
             </Text>
-            <Text className="my-2">{item.body}</Text>
+            <Text style={{ fontFamily: "Inter" }} className="my-2">
+              {item.body}
+            </Text>
           </View>
         )}
       />

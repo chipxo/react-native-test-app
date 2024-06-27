@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { StatusBar } from "expo-status-bar";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "@/redux/store";
+import { store, persistor, useAppDispatch } from "@/redux/store";
 import { Provider } from "react-redux";
 import { asyncStoragePersister, queryClient } from "@/utils/queryClient";
 import { rootScreens } from "@/constants/rootScreens";
@@ -16,12 +16,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [color, setColor] = useState<"dark" | "light">("dark");
   const pathname = usePathname();
+  const [loaded] = useFonts({
+    Inter: require("../assets/fonts/Inter.ttf"),
+  });
 
   const curPath = pathname.split("/").at(-1);
-
-  const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-  });
 
   useEffect(() => {
     if (loaded) {

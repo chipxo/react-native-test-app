@@ -1,7 +1,4 @@
-import { Pressable } from "react-native";
 import { Colors } from "./Colors";
-import Ionicons from "@expo/vector-icons/build/Ionicons";
-import { useRouter } from "expo-router";
 
 export const rootScreens = [
   {
@@ -37,15 +34,6 @@ export const rootScreens = [
       headerTitle: "",
       headerBackTitleVisible: false,
       headerTintColor: Colors.backBtn,
-      // headerLeft: () => {
-      //   const router = useRouter();
-
-      //   return (
-      //     <Pressable onPress={() => router.navigate("home")} className="">
-      //       <Ionicons name="chevron-back" size={24} color={Colors.backBtn} />
-      //     </Pressable>
-      //   );
-      // },
     },
   },
 ];

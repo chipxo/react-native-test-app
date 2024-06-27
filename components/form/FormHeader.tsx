@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import Feather from "@expo/vector-icons/build/Feather";
 import { useTranslation } from "react-i18next";
@@ -12,10 +12,12 @@ const FormHeader = ({ isSignUp = false }) => {
         <Feather name="user-plus" size={24} color={Colors.secondaryGreen} />
       </View>
       <View>
-        <Text className="mb-1 font-semibold">
+        <Text style={{ fontFamily: "Inter" }} className="mb-1 font-semibold">
           {t(isSignUp ? "signUp" : "login")}
         </Text>
-        <Text className="text-secondary-grey">{t("persAcc")}</Text>
+        <Text style={{ fontFamily: "Inter" }} className="text-secondary-grey">
+          {t("persAcc")}
+        </Text>
       </View>
     </View>
   );

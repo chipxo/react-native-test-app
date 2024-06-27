@@ -1,4 +1,4 @@
-import { View, Text, StatusBar } from "react-native";
+import { View, StatusBar, Text } from "react-native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProfileItem from "@/components/profile/ProfileItem";
@@ -10,9 +10,9 @@ import { useAppDispatch } from "@/redux/store";
 import { setLanguage } from "@/redux/lan/languageSlice";
 
 const LanguagePage = () => {
+  const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   const changeLanguage = (ln: "en" | "ar") => {
     dispatch(setLanguage(ln));
@@ -34,7 +34,9 @@ const LanguagePage = () => {
       </View>
 
       <View className="mx-4 space-y-6 pt-4">
-        <Text className="text-[22px] font-bold">{t("language")}</Text>
+        <Text style={{ fontFamily: "Inter" }} className="text-[22px] font-bold">
+          {t("language")}
+        </Text>
         <View>
           <ProfileItem
             onPress={() => changeLanguage("en")}
@@ -49,7 +51,12 @@ const LanguagePage = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <Text className="border font-semibold">English</Text>
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
+              English
+            </Text>
           </ProfileItem>
         </View>
 
@@ -67,7 +74,12 @@ const LanguagePage = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <Text className="border font-semibold">Arabic</Text>
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
+              Arabic
+            </Text>
           </ProfileItem>
         </View>
       </View>

@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable, Text } from "react-native";
 import { Control, FieldError } from "react-hook-form";
 import AntDesign from "@expo/vector-icons/build/AntDesign";
 import { cn } from "@/utils/cn";
@@ -16,6 +16,7 @@ type InputFieldProps = {
   error: FieldError | undefined;
   errorMessage: string | undefined;
   isPassword?: boolean;
+  isLogIn?: boolean;
   control: Control<SignUpSchema, any>;
 };
 
@@ -25,6 +26,7 @@ const InputField = ({
   error,
   errorMessage,
   isPassword = false,
+  isLogIn = false,
   control,
 }: InputFieldProps) => {
   const { t } = useTranslation();
@@ -33,11 +35,14 @@ const InputField = ({
 
   return (
     <View>
-      {error && (
-        <ErrorItem errorMessage={errorMessage} isPassword={isPassword} />
-      )}
+      {error && <ErrorItem errorMessage={errorMessage} />}
 
-      <Text className="pl-8 text-tab-icon-default">{t(labelName)}</Text>
+      <Text
+        style={{ fontFamily: "Inter" }}
+        className="pl-8 text-tab-icon-default"
+      >
+        {t(labelName)}
+      </Text>
       {isPassword ? (
         <Input
           error={error}
@@ -49,9 +54,18 @@ const InputField = ({
         <Input error={error} name={name} control={control} />
       )}
 
+      {isLogIn && error && (
+        <Text
+          style={{ fontFamily: "Inter" }}
+          className="absolute right-4 text-primary"
+        >
+          {t("forgot")}
+        </Text>
+      )}
+
       {isPassword && (
         <Pressable
-          className="absolute right-8 top-10"
+          className={cn("absolute top-[40]", error ? "right-16" : "right-8")}
           onPress={() => setShowPass((prev) => !prev)}
         >
           <AntDesign

@@ -1,21 +1,12 @@
-import {
-  View,
-  SafeAreaView,
-  Button,
-  FlatList,
-  ImageBackground,
-  Image,
-  Text,
-} from "react-native";
-import BgImg from "@/components/BgImg";
+import { View, SafeAreaView, Button, Image } from "react-native";
 import { items } from "@/constants/WelcomeItems";
 import { Colors } from "@/constants/Colors";
-import { Link, Redirect, useRouter } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 import WelcomeItems from "@/components/welcome/WelcomeItems";
 import CommonButton from "@/components/CommonButton";
 import { t } from "i18next";
 import bg from "@/assets/images/bg.png";
-import { RootState, store } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 
 export default function WelcomeScreen() {
@@ -25,6 +16,7 @@ export default function WelcomeScreen() {
   if (loggedIn) {
     return <Redirect href="enterPinCode" />;
   }
+
   return (
     <>
       <SafeAreaView>

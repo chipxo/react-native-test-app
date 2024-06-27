@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import React from "react";
 import { Post } from "../home/Posts";
 

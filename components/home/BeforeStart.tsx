@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import React from "react";
 import LinkIcon from "./LinkIcon";
 import { useTranslation } from "react-i18next";
@@ -9,46 +9,75 @@ const BeforeStart = () => {
   const { t } = useTranslation();
   return (
     <View>
-      <Text className="text-secondary-grey mb-2 px-4">
+      <Text
+        style={{ fontFamily: "Inter" }}
+        className="mb-2 px-4 text-secondary-grey"
+      >
         {t("beforeYouStart")}
       </Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        className="gap-4 ml-0"
+        className="space-x-4"
       >
-        <View className="bg-secondary-grey rounded-xl p-6 w-[233] h-[152]">
+        <View className="ml-4 h-[152] w-[233] rounded-xl bg-secondary-grey p-6">
           <View className="flex-row items-center gap-4">
-            <View className="bg-primary p-4 rounded-full">
+            <View className="rounded-full bg-primary p-4">
               <LinkIcon />
             </View>
 
             <View>
-              <Text className="text-white text-[15px]">Lorem ipsum</Text>
-              <Text className="text-white text-[15px]">Lorem ipsum</Text>
+              <Text
+                style={{ fontFamily: "Inter" }}
+                className="text-[15px] text-white"
+              >
+                Lorem ipsum
+              </Text>
+              <Text
+                style={{ fontFamily: "Inter" }}
+                className="text-[15px] text-white"
+              >
+                Lorem ipsum
+              </Text>
             </View>
           </View>
 
-          <View className="mt-6 flex-row justify-between items-center">
-            <Text className="text-white text-[15px]">
+          <View className="mt-6 flex-row items-center justify-between">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="text-[15px] text-white"
+            >
               {t("steps", { count: 2 })}
             </Text>
             <FontAwesome6 name="arrow-right" size={20} color={Colors.white} />
           </View>
         </View>
-        <View className="bg-secondary-red rounded-xl p-6 w-[233] h-[152]">
+        <View className="h-[152] w-[233] rounded-xl bg-secondary-red p-6">
           <View className="flex-row items-center gap-4">
-            <View className="bg-primary p-4 rounded-full text-secondary-green">
+            <View className="rounded-full bg-primary p-4 text-secondary-green">
               <LinkIcon isGreen />
             </View>
 
             <View>
-              <Text className="text-white text-[15px]">Lorem ipsum</Text>
-              <Text className="text-white text-[15px]">Lorem ipsum</Text>
+              <Text
+                style={{ fontFamily: "Inter" }}
+                className="text-[15px] text-white"
+              >
+                Lorem ipsum
+              </Text>
+              <Text
+                style={{ fontFamily: "Inter" }}
+                className="text-[15px] text-white"
+              >
+                Lorem ipsum
+              </Text>
             </View>
           </View>
-          <View className="mt-6 flex-row justify-between items-center">
-            <Text className="text-secondary-grey text-[15px]">
+          <View className="mt-6 flex-row items-center justify-between">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="text-[15px] text-secondary-grey"
+            >
               {t("steps", { count: 3 })}
             </Text>
             <FontAwesome6
