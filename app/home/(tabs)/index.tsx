@@ -6,11 +6,17 @@ import Posts from "@/components/home/Posts";
 import { useQuery } from "@tanstack/react-query";
 import { useFetch } from "@/hooks/useFetch";
 import { useTranslation } from "react-i18next";
-import { RootState } from "@/redux/store";
+import { RootState, useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { Redirect } from "expo-router";
+import { useEffect } from "react";
+import { setupAxiosInterceptor } from "@/utils/setupAxiosInterceptor";
+import { getTokens } from "@/utils/getTokens";
+import { createUser } from "@/redux/user/userSlice";
+import { getCurrentUser } from "@/utils/getCurrentUser";
 
 const HomePage = () => {
+  const dispatch = useAppDispatch();
   const { loggedIn } = useSelector((state: RootState) => state.auth);
   const { name } = useSelector((state: RootState) => state.user);
 
@@ -34,6 +40,23 @@ const HomePage = () => {
   if (error) {
     return <Text>An error occured</Text>;
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await setupAxiosInterceptor();
+        const { accessToken } = await getTokens();
+
+        const user = await getCurrentUser(accessToken);
+
+        dispatch(createUser(user));
+      } catch (e) {
+        console.log("Failed to fetch user data: ", e);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <View className="bg-background">

@@ -22,6 +22,10 @@ import { Colors } from "@/constants/Colors";
 import { Redirect, useRouter } from "expo-router";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
 import * as LocalAuthentication from "expo-local-authentication";
+import { createUser } from "@/redux/user/userSlice";
+import { getCurrentUser } from "@/utils/getCurrentUser";
+import { getTokens } from "@/utils/getTokens";
+import { setupAxiosInterceptor } from "@/utils/setupAxiosInterceptor";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
@@ -29,6 +33,8 @@ const enterPinCode = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { email } = useSelector((state: RootState) => state.user);
+
+  const storedPin = SecureStore.getItem("pin");
 
   const handlePress = (value: string) => {
     if (pin.length < 5) {
@@ -40,11 +46,10 @@ const enterPinCode = () => {
     setPin((prevPin) => prevPin.slice(0, -1));
   };
 
-  const storedPin = SecureStore.getItem("pin");
-
   const handleContinue = async () => {
-    console.log(storedPin);
-    if (pin === storedPin) router.push("home");
+    if (pin === storedPin) {
+      setTimeout(() => router.push("home"), 800);
+    }
 
     if (pin.length === 5 && pin !== storedPin) {
       alert("Passwords don't match");
@@ -58,26 +63,6 @@ const enterPinCode = () => {
     return <Redirect href="createPinCode" />;
   }
 
-  const authenticate = async () => {
-    const hasHardware = await LocalAuthentication.hasHardwareAsync();
-    const isEnrolled = await LocalAuthentication.isEnrolledAsync();
-
-    if (hasHardware && isEnrolled) {
-      const result = await LocalAuthentication.authenticateAsync({
-        promptMessage: "Authenticate with Face ID",
-      });
-
-      if (result.success) {
-        router.push("home");
-      } else {
-        alert("Authentication failed. Please enter your PIN.");
-      }
-    }
-  };
-
-  // useEffect(() => {
-  //   authenticate();
-  // }, []);
   useEffect(() => {
     const auth = async () => {
       const { success } = await LocalAuthentication.authenticateAsync();
@@ -89,6 +74,7 @@ const enterPinCode = () => {
 
     auth();
   }, []);
+
   return (
     <>
       <View className="flex-1 bg-white pt-20">

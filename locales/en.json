@@ -31,5 +31,10 @@
   "repeatCode": "Repeat a Pin code",
   "searchProducts": "Search Products...",
   "noProducts": "No results found",
-  "error": "An error occurred"
+  "error": "An error occurred",
+  "forgot": "Forgot?",
+  "nameReq": "Name must be at least 2 characters",
+  "emailReq": "Email must be at least 4 characters",
+  "emailValid": "Must be a valid email",
+  "passReq": "Password must be at least 8 characters"
 }

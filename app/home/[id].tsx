@@ -1,14 +1,10 @@
 import {
   View,
   Text,
-  FlatList,
   ScrollView,
   ActivityIndicator,
   Image,
   StatusBar,
-  Pressable,
-  SafeAreaView,
-  Button,
 } from "react-native";
 import React from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -50,11 +46,11 @@ const Post = () => {
     <>
       <BottomButton title={t("back")} onPress={() => router.back()} />
 
-      <ScrollView className="bg-background space-y-6">
-        <View className="bg-white min-h-[430] rounded-b-[20] items-center justify-end pb-10 space-y-8">
+      <ScrollView className="space-y-6 bg-background">
+        <View className="min-h-[430] items-center justify-end space-y-8 rounded-b-[20] bg-white pb-10">
           <StatusBar barStyle="dark-content" />
 
-          <Text className="text-[28px] text-center px-4 font-bold">
+          <Text className="px-4 text-center text-[28px] font-bold">
             {data?.title}
           </Text>
           <Image source={postImage} />
@@ -62,8 +58,8 @@ const Post = () => {
 
         <View className="mx-4">
           <View>
-            <Text className="text-secondary-grey mb-2">{t("about")}</Text>
-            <View className="bg-white rounded-[16px] p-4">
+            <Text className="mb-2 text-secondary-grey">{t("about")}</Text>
+            <View className="rounded-[16px] bg-white p-4">
               <Text>{data?.body}</Text>
             </View>
           </View>

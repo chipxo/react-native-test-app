@@ -1,45 +1,19 @@
-import React, { useState } from "react";
 import {
   View,
-  Text,
-  TextInput,
-  Pressable,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
-  StyleSheet,
   Image,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
-import { Colors } from "@/constants/Colors";
 import CommonButton from "@/components/CommonButton";
 import bg from "@/assets/images/bg.png";
-import { useTranslation } from "react-i18next";
-import {
-  SubmitHandler,
-  useForm,
-  useController,
-  ErrorOption,
-  Field,
-  FieldArray,
-  FieldArrayPath,
-  FieldError,
-  FieldErrors,
-  FieldValues,
-  FormState,
-  RegisterOptions,
-  SubmitErrorHandler,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { SignUpSchema, signUpSchema } from "@/constants/formSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/components/form/Input";
-import ErrorItem from "@/components/form/ErrorItem";
 import InputField from "@/components/form/InputField";
 import FormHeader from "@/components/form/FormHeader";
-import { useRouter } from "expo-router";
 import BackIcon from "@/components/navigation/BackIcon";
 
 const SignUp = () => {

@@ -1,34 +1,20 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Button,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RootState, useAppDispatch } from "@/redux/store";
-import { setLanguage } from "@/redux/lan/languageSlice";
-import { useSelector } from "react-redux";
+import { View, Text } from "react-native";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import BackIcon from "@/components/navigation/BackIcon";
 import { cn } from "@/utils/cn";
 import BottomButton from "@/components/BottomButton";
-import Keychain from "react-native-keychain";
 import * as SecureStore from "expo-secure-store";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
-import * as LocalAuthentication from "expo-local-authentication";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
   const [pin, setPin] = useState("");
   const [pinToRepeat, setPinToRepeat] = useState("");
   const router = useRouter();
-
-  const storedPin = SecureStore.getItem("pin");
 
   const handlePress = (value: string) => {
     if (pin.length < 5) {
@@ -55,8 +41,8 @@ const enterPinCode = () => {
       if (pin === pinToRepeat) {
         try {
           await SecureStore.setItemAsync("pin", pin);
+          setTimeout(() => router.push("home"), 800);
           setPin("");
-          router.push("home");
         } catch (error) {
           alert("Error while creating password");
           setPin("");

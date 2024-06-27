@@ -3,7 +3,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
 import { useTranslation } from "react-i18next";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import ProfileItem from "@/components/profile/ProfileItem";
 import { RootState, useAppDispatch } from "@/redux/store";
@@ -21,10 +21,11 @@ const Profile = () => {
   const handleLogOut = async () => {
     await SecureStore.deleteItemAsync("pin");
 
-    dispatch(logOut());
-    dispatch(deleteUser());
-
-    router.push("welcome");
+    setTimeout(() => {
+      dispatch(logOut());
+      dispatch(deleteUser());
+      router.push("welcome");
+    }, 600);
   };
 
   return (
