@@ -34,6 +34,7 @@ const HomePage = () => {
     queryKey: ["posts", query],
     queryFn: () => useFetch(query),
   });
+  console.log("home data", data);
 
   useEffect(() => {
     const fetchData = async () => {
