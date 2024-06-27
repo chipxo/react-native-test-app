@@ -17,7 +17,7 @@ export default function RootLayout() {
   const [color, setColor] = useState<"dark" | "light">("dark");
   const pathname = usePathname();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Inter: require("../assets/fonts/Inter-VariableFont_slnt,wght.ttf"),
   });
 
   const curPath = pathname.split("/").at(-1);

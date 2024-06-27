@@ -1,6 +1,7 @@
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import React from "react";
 import { Post } from "../home/Posts";
+import ThemedText from "../ThemedText";
 
 type SearchItemsProps = {
   data: Post[];
@@ -14,8 +15,10 @@ const SearchItems = ({ data }: SearchItemsProps) => {
       scrollEnabled={false}
       renderItem={({ item }) => (
         <View className="mb-2 w-full rounded-[16px] bg-white p-4">
-          <Text className="text-[15px] font-semibold">ID: {item.id}</Text>
-          <Text>Name: {item.title}</Text>
+          <ThemedText className="text-[15px] font-semibold">
+            ID: {item.id}
+          </ThemedText>
+          <ThemedText>Name: {item.title}</ThemedText>
         </View>
       )}
     />

@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { Control, FieldError } from "react-hook-form";
 import AntDesign from "@expo/vector-icons/build/AntDesign";
 import { cn } from "@/utils/cn";
@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { TranslationKeys } from "@/utils/i18n";
 import ErrorItem from "./ErrorItem";
+import ThemedText from "../ThemedText";
 
 type InputFieldProps = {
   name: "name" | "email" | "password";
@@ -37,7 +38,9 @@ const InputField = ({
     <View>
       {error && <ErrorItem errorMessage={errorMessage} />}
 
-      <Text className="pl-8 text-tab-icon-default">{t(labelName)}</Text>
+      <ThemedText className="pl-8 text-tab-icon-default">
+        {t(labelName)}
+      </ThemedText>
       {isPassword ? (
         <Input
           error={error}
@@ -50,7 +53,9 @@ const InputField = ({
       )}
 
       {isLogIn && error && (
-        <Text className="absolute right-4 text-primary">{t("forgot")}</Text>
+        <ThemedText className="absolute right-4 text-primary">
+          {t("forgot")}
+        </ThemedText>
       )}
 
       {isPassword && (

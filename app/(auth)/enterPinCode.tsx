@@ -1,38 +1,23 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Button,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import { View, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RootState, useAppDispatch } from "@/redux/store";
-import { setLanguage } from "@/redux/lan/languageSlice";
+import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import BackIcon from "@/components/navigation/BackIcon";
-import { cn } from "@/utils/cn";
 import BottomButton from "@/components/BottomButton";
 import { Feather } from "@expo/vector-icons";
-import Keychain from "react-native-keychain";
 import * as SecureStore from "expo-secure-store";
 import { Colors } from "@/constants/Colors";
 import { Redirect, useRouter } from "expo-router";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
 import * as LocalAuthentication from "expo-local-authentication";
-import { createUser } from "@/redux/user/userSlice";
-import { getCurrentUser } from "@/utils/getCurrentUser";
-import { getTokens } from "@/utils/getTokens";
-import { setupAxiosInterceptor } from "@/utils/setupAxiosInterceptor";
+import PinCodeIndicator from "@/components/pinCode/PinCodeIndicator";
+import ThemedText from "@/components/ThemedText";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
-  const [pin, setPin] = useState("");
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const { email } = useSelector((state: RootState) => state.user);
+  const [pin, setPin] = useState("");
 
   const storedPin = SecureStore.getItem("pin");
 
@@ -86,29 +71,22 @@ const enterPinCode = () => {
               color={Colors.secondaryGreen}
             />
           </View>
-          <Text className="text-center text-[15px] font-semibold">{email}</Text>
+
+          <ThemedText className="text-center text-[15px] font-semibold">
+            {email}
+          </ThemedText>
 
           <Pressable className="mt-2">
-            <Text className="text-center text-[15px] font-semibold text-primary">
+            <ThemedText className="text-center text-[15px] font-semibold text-primary">
               {t("changeAcc")}
-            </Text>
+            </ThemedText>
           </Pressable>
 
-          <Text className="mt-8 text-center text-secondary-grey">
+          <ThemedText className="mt-8 text-center text-secondary-grey">
             {t("enterCode", { count: 5 })}:
-          </Text>
+          </ThemedText>
 
-          <View className="flex-row justify-center gap-3 pt-5">
-            {[...Array(5)].map((_, index) => (
-              <View
-                key={index}
-                className={cn(
-                  "h-6 w-6 rounded-full",
-                  index < pin.length ? "bg-primary" : "bg-profile-fallback",
-                )}
-              />
-            ))}
-          </View>
+          <PinCodeIndicator length={pin.length} />
         </View>
 
         <View className="mt-52 flex-1 flex-row justify-around border-t border-profile-fallback pt-12">

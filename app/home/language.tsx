@@ -1,4 +1,4 @@
-import { View, Text, StatusBar } from "react-native";
+import { View, StatusBar } from "react-native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProfileItem from "@/components/profile/ProfileItem";
@@ -8,11 +8,12 @@ import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useAppDispatch } from "@/redux/store";
 import { setLanguage } from "@/redux/lan/languageSlice";
+import ThemedText from "@/components/ThemedText";
 
 const LanguagePage = () => {
+  const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   const changeLanguage = (ln: "en" | "ar") => {
     dispatch(setLanguage(ln));
@@ -34,7 +35,9 @@ const LanguagePage = () => {
       </View>
 
       <View className="mx-4 space-y-6 pt-4">
-        <Text className="text-[22px] font-bold">{t("language")}</Text>
+        <ThemedText className="text-[22px] font-bold">
+          {t("language")}
+        </ThemedText>
         <View>
           <ProfileItem
             onPress={() => changeLanguage("en")}
@@ -49,7 +52,7 @@ const LanguagePage = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <Text className="border font-semibold">English</Text>
+            <ThemedText className="border font-semibold">English</ThemedText>
           </ProfileItem>
         </View>
 
@@ -67,7 +70,7 @@ const LanguagePage = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <Text className="border font-semibold">Arabic</Text>
+            <ThemedText className="border font-semibold">Arabic</ThemedText>
           </ProfileItem>
         </View>
       </View>

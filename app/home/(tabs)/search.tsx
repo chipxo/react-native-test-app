@@ -1,11 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  ActivityIndicator,
-  ScrollView,
-} from "react-native";
+import { View, TextInput, ActivityIndicator, ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { EvilIcons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
@@ -13,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useFetch } from "@/hooks/useFetch";
 import { debounce } from "lodash";
 import SearchItems from "@/components/search/SearchItems";
+import ThemedText from "@/components/ThemedText";
 
 const Search = () => {
   const { t } = useTranslation();
@@ -39,7 +34,9 @@ const Search = () => {
   return (
     <ScrollView className="min-h-screen bg-background">
       <View className="relative mx-4 pb-[79px] pt-12">
-        <Text className="mb-6 text-[22px] font-bold">{t("Search")}</Text>
+        <ThemedText className="mb-6 text-[22px] font-bold">
+          {t("Search")}
+        </ThemedText>
         <TextInput
           onChangeText={(text) => setText(text)}
           value={text}
@@ -54,12 +51,12 @@ const Search = () => {
 
         {isLoading && <ActivityIndicator />}
 
-        {error && <Text>{t("error")}</Text>}
+        {error && <ThemedText>{t("error")}</ThemedText>}
 
         {!isLoading && data?.length === 0 && (
-          <Text className="pt-4 text-center text-[18px] text-secondary-grey">
+          <ThemedText className="pt-4 text-center text-[18px] text-secondary-grey">
             {t("noProducts")}
-          </Text>
+          </ThemedText>
         )}
 
         {!isLoading && data && <SearchItems data={data} />}

@@ -1,6 +1,7 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import React from "react";
 import Feather from "@expo/vector-icons/build/Feather";
+import ThemedText from "../ThemedText";
 
 type NumKeyBoardProps = {
   handlePress: (val: string) => void;
@@ -12,38 +13,44 @@ const NumKeyBoard = ({ handlePress, handleDelete }: NumKeyBoardProps) => {
     <>
       <View className="gap-8">
         <TouchableOpacity className="" onPress={() => handlePress("1")}>
-          <Text className="text-[28px] font-bold">1</Text>
+          <ThemedText className="text-[28px] font-bold">1</ThemedText>
         </TouchableOpacity>
         <TouchableOpacity className="" onPress={() => handlePress("4")}>
-          <Text className="text-[28px] font-bold">4</Text>
+          <ThemedText className="text-[28px] font-bold">4</ThemedText>
         </TouchableOpacity>
         <TouchableOpacity className="" onPress={() => handlePress("7")}>
-          <Text className="text-[28px] font-bold">7</Text>
+          <ThemedText className="text-[28px] font-bold">7</ThemedText>
         </TouchableOpacity>
       </View>
       <View className="gap-8">
         <TouchableOpacity className="" onPress={() => handlePress("2")}>
-          <Text className="text-[28px] font-bold">2</Text>
+          <ThemedText className="text-[28px] font-bold">2</ThemedText>
         </TouchableOpacity>
         <TouchableOpacity className="" onPress={() => handlePress("5")}>
-          <Text className="text-[28px] font-bold">5</Text>
+          <ThemedText className="text-[28px] font-bold">5</ThemedText>
         </TouchableOpacity>
         <TouchableOpacity className="" onPress={() => handlePress("8")}>
-          <Text className="text-[28px] font-bold">8</Text>
+          <ThemedText className="text-[28px] font-bold">8</ThemedText>
         </TouchableOpacity>
         <TouchableOpacity className="" onPress={() => handlePress("0")}>
-          <Text className="text-[28px] font-bold">0</Text>
+          <ThemedText className="text-[28px] font-bold">0</ThemedText>
         </TouchableOpacity>
       </View>
       <View className="gap-8">
         <TouchableOpacity className="" onPress={() => handlePress("3")}>
-          <Text className="text-center text-[28px] font-bold">3</Text>
+          <ThemedText className="text-center text-[28px] font-bold">
+            3
+          </ThemedText>
         </TouchableOpacity>
         <TouchableOpacity className="" onPress={() => handlePress("6")}>
-          <Text className="text-center text-[28px] font-bold">6</Text>
+          <ThemedText className="text-center text-[28px] font-bold">
+            6
+          </ThemedText>
         </TouchableOpacity>
         <TouchableOpacity className="" onPress={() => handlePress("9")}>
-          <Text className="text-center text-[28px] font-bold">9</Text>
+          <ThemedText className="text-center text-[28px] font-bold">
+            9
+          </ThemedText>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleDelete} className="">
           <Feather name="delete" size={24} color="black" />

@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   ScrollView,
   ActivityIndicator,
   SafeAreaView,
@@ -20,6 +19,7 @@ import { setupAxiosInterceptor } from "@/utils/setupAxiosInterceptor";
 import { getTokens } from "@/utils/getTokens";
 import { User, createUser } from "@/redux/user/userSlice";
 import { getCurrentUser } from "@/utils/getCurrentUser";
+import ThemedText from "@/components/ThemedText";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -39,9 +39,10 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         await setupAxiosInterceptor();
-        const { accessToken } = await getTokens();
+        const { accessToken, refreshToken } = await getTokens();
 
-        const user = await getCurrentUser(accessToken);
+        const user = await getCurrentUser(refreshToken);
+
         setRefreshedUser(user);
       } catch (error) {
         console.log("Failed to fetch user data: ", error);
@@ -80,7 +81,7 @@ const HomePage = () => {
   if (error) {
     return (
       <SafeAreaView>
-        <Text>An error occured</Text>
+        <ThemedText>An error occured</ThemedText>
       </SafeAreaView>
     );
   }
@@ -102,7 +103,9 @@ const HomePage = () => {
           </View>
 
           <View className="px-4">
-            <Text className="text-secondary-grey">{t("posts")}</Text>
+            <ThemedText className="text-secondary-grey">
+              {t("posts")}
+            </ThemedText>
 
             <Posts posts={data} />
           </View>

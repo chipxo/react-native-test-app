@@ -1,20 +1,22 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import BackIcon from "@/components/navigation/BackIcon";
-import { cn } from "@/utils/cn";
 import BottomButton from "@/components/BottomButton";
 import * as SecureStore from "expo-secure-store";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
+import PinCodeIndicator from "@/components/pinCode/PinCodeIndicator";
+import ThemedText from "@/components/ThemedText";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
+  const router = useRouter();
+
   const [pin, setPin] = useState("");
   const [pinToRepeat, setPinToRepeat] = useState("");
-  const router = useRouter();
 
   const handlePress = (value: string) => {
     if (pin.length < 5) {
@@ -67,24 +69,16 @@ const enterPinCode = () => {
               color={Colors.secondaryGreen}
             />
           </View>
-          <Text className="text-center font-semibold">
-            {t(pinToRepeat ? "repeatCode" : "createCode")}
-          </Text>
 
-          <Text className="mt-8 text-center text-secondary-grey">
+          <ThemedText className="text-center font-semibold">
+            {t(pinToRepeat ? "repeatCode" : "createCode")}
+          </ThemedText>
+
+          <ThemedText className="mt-8 text-center text-secondary-grey">
             {t("enterCode", { count: 5 })}
-          </Text>
-          <View className="flex-row justify-center gap-3 pt-5">
-            {[...Array(5)].map((_, index) => (
-              <View
-                key={index}
-                className={cn(
-                  "h-6 w-6 rounded-full",
-                  index < pin.length ? "bg-primary" : "bg-profile-fallback",
-                )}
-              />
-            ))}
-          </View>
+          </ThemedText>
+
+          <PinCodeIndicator length={pin.length} />
         </View>
 
         <View className="mt-52 flex-1 flex-row justify-around border-t border-profile-fallback pt-12">
