@@ -1,8 +1,7 @@
-import { View, ImageBackground } from "react-native";
+import { View, ImageBackground, Text } from "react-native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import bgImage from "@/assets/images/home/bg.png";
-import ThemedText from "../ThemedText";
 
 type UserNameProps = {
   userName: string | undefined;
@@ -21,10 +20,15 @@ const UserName = ({ userName = "John doe" }: UserNameProps) => {
         />
       </View>
 
-      <ThemedText className="text-white">{t("yourName")}</ThemedText>
-      <ThemedText className="text-[28px] font-semibold text-white">
+      <Text style={{ fontFamily: "Inter" }} className="text-white">
+        {t("yourName")}
+      </Text>
+      <Text
+        style={{ fontFamily: "Inter" }}
+        className="text-[28px] font-semibold text-white"
+      >
         {userName}
-      </ThemedText>
+      </Text>
     </View>
   );
 };

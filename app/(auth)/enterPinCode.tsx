@@ -1,4 +1,4 @@
-import { View, Pressable } from "react-native";
+import { View, Pressable, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
@@ -11,13 +11,12 @@ import { Redirect, useRouter } from "expo-router";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
 import * as LocalAuthentication from "expo-local-authentication";
 import PinCodeIndicator from "@/components/pinCode/PinCodeIndicator";
-import ThemedText from "@/components/ThemedText";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const { email } = useSelector((state: RootState) => state.user);
-  const [pin, setPin] = useState("");
+  const [pin, setPin] = useState<string>("");
 
   const storedPin = SecureStore.getItem("pin");
 
@@ -44,15 +43,11 @@ const enterPinCode = () => {
     if (pin.length < 5) alert("Enter 5 digits");
   };
 
-  if (!storedPin) {
-    return <Redirect href="createPinCode" />;
-  }
-
   useEffect(() => {
     const auth = async () => {
       const { success } = await LocalAuthentication.authenticateAsync();
       if (success) {
-        setTimeout(() => setPin(storedPin), 400);
+        setTimeout(() => setPin(storedPin!), 400);
         setTimeout(() => router.push("home"), 800);
       }
     };
@@ -72,19 +67,28 @@ const enterPinCode = () => {
             />
           </View>
 
-          <ThemedText className="text-center text-[15px] font-semibold">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="font-Inter text-center text-[15px] font-semibold"
+          >
             {email}
-          </ThemedText>
+          </Text>
 
           <Pressable className="mt-2">
-            <ThemedText className="text-center text-[15px] font-semibold text-primary">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="text-center text-[15px] font-semibold text-primary"
+            >
               {t("changeAcc")}
-            </ThemedText>
+            </Text>
           </Pressable>
 
-          <ThemedText className="mt-8 text-center text-secondary-grey">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="mt-8 text-center text-secondary-grey"
+          >
             {t("enterCode", { count: 5 })}:
-          </ThemedText>
+          </Text>
 
           <PinCodeIndicator length={pin.length} />
         </View>

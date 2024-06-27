@@ -1,4 +1,4 @@
-import { View, StatusBar } from "react-native";
+import { View, StatusBar, Text } from "react-native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProfileItem from "@/components/profile/ProfileItem";
@@ -8,7 +8,6 @@ import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useAppDispatch } from "@/redux/store";
 import { setLanguage } from "@/redux/lan/languageSlice";
-import ThemedText from "@/components/ThemedText";
 
 const LanguagePage = () => {
   const dispatch = useAppDispatch();
@@ -35,9 +34,9 @@ const LanguagePage = () => {
       </View>
 
       <View className="mx-4 space-y-6 pt-4">
-        <ThemedText className="text-[22px] font-bold">
+        <Text style={{ fontFamily: "Inter" }} className="text-[22px] font-bold">
           {t("language")}
-        </ThemedText>
+        </Text>
         <View>
           <ProfileItem
             onPress={() => changeLanguage("en")}
@@ -52,7 +51,12 @@ const LanguagePage = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <ThemedText className="border font-semibold">English</ThemedText>
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
+              English
+            </Text>
           </ProfileItem>
         </View>
 
@@ -70,7 +74,12 @@ const LanguagePage = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <ThemedText className="border font-semibold">Arabic</ThemedText>
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
+              Arabic
+            </Text>
           </ProfileItem>
         </View>
       </View>

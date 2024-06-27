@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import BackIcon from "@/components/navigation/BackIcon";
@@ -9,7 +9,6 @@ import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import NumKeyBoard from "@/components/numKeyBoard/NumKeyBoard";
 import PinCodeIndicator from "@/components/pinCode/PinCodeIndicator";
-import ThemedText from "@/components/ThemedText";
 
 const enterPinCode = () => {
   const { t } = useTranslation();
@@ -70,13 +69,19 @@ const enterPinCode = () => {
             />
           </View>
 
-          <ThemedText className="text-center font-semibold">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="text-center font-semibold"
+          >
             {t(pinToRepeat ? "repeatCode" : "createCode")}
-          </ThemedText>
+          </Text>
 
-          <ThemedText className="mt-8 text-center text-secondary-grey">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="mt-8 text-center text-secondary-grey"
+          >
             {t("enterCode", { count: 5 })}
-          </ThemedText>
+          </Text>
 
           <PinCodeIndicator length={pin.length} />
         </View>

@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,6 @@ import { logOut } from "@/redux/auth/authSlice";
 import * as SecureStore from "expo-secure-store";
 import { useSelector } from "react-redux";
 import { deleteUser } from "@/redux/user/userSlice";
-import ThemedText from "@/components/ThemedText";
 
 const Profile = () => {
   const { t } = useTranslation();
@@ -39,18 +38,23 @@ const Profile = () => {
         />
       </View>
       <View className="mx-4 space-y-6 pt-4">
-        <ThemedText className="text-[22px] font-bold">
+        <Text style={{ fontFamily: "Inter" }} className="text-[22px] font-bold">
           {t("settings")}
-        </ThemedText>
+        </Text>
         <View className="flex-row items-center space-x-4 rounded-[16px] border border-common-border px-4 py-6">
           <View className="h-8 w-8 rounded-full bg-profile-fallback" />
-          <ThemedText className="font-semibold">{name}</ThemedText>
+          <Text style={{ fontFamily: "Inter" }} className="font-semibold">
+            {name}
+          </Text>
         </View>
 
         <View>
-          <ThemedText className="mb-2 text-secondary-text">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="mb-2 text-secondary-text"
+          >
             {t("basic")}
-          </ThemedText>
+          </Text>
           <ProfileItem
             onPress={() => router.push("home/language")}
             icon={
@@ -64,16 +68,22 @@ const Profile = () => {
             }
           >
             <MaterialIcons name="language" size={24} color={Colors.primary} />
-            <ThemedText className="border font-semibold">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
               {t("language")}
-            </ThemedText>
+            </Text>
           </ProfileItem>
         </View>
 
         <View>
-          <ThemedText className="mb-2 text-secondary-text">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="mb-2 text-secondary-text"
+          >
             {t("other")}
-          </ThemedText>
+          </Text>
           <ProfileItem
             onPress={handleLogOut}
             icon={
@@ -87,9 +97,12 @@ const Profile = () => {
             }
           >
             <Ionicons name="log-out-outline" size={24} color={Colors.primary} />
-            <ThemedText className="border font-semibold">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="border font-semibold"
+            >
               {t("logOut")}
-            </ThemedText>
+            </Text>
           </ProfileItem>
         </View>
       </View>

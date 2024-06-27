@@ -3,6 +3,7 @@ import {
   ScrollView,
   ActivityIndicator,
   SafeAreaView,
+  Text,
 } from "react-native";
 import TestTask from "@/components/home/TestTask";
 import BeforeStart from "@/components/home/BeforeStart";
@@ -19,7 +20,6 @@ import { setupAxiosInterceptor } from "@/utils/setupAxiosInterceptor";
 import { getTokens } from "@/utils/getTokens";
 import { User, createUser } from "@/redux/user/userSlice";
 import { getCurrentUser } from "@/utils/getCurrentUser";
-import ThemedText from "@/components/ThemedText";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -81,7 +81,7 @@ const HomePage = () => {
   if (error) {
     return (
       <SafeAreaView>
-        <ThemedText>An error occured</ThemedText>
+        <Text style={{ fontFamily: "Inter" }}>An error occured</Text>
       </SafeAreaView>
     );
   }
@@ -103,9 +103,12 @@ const HomePage = () => {
           </View>
 
           <View className="px-4">
-            <ThemedText className="text-secondary-grey">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="text-secondary-grey"
+            >
               {t("posts")}
-            </ThemedText>
+            </Text>
 
             <Posts posts={data} />
           </View>

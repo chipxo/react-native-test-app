@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   Image,
   StatusBar,
+  Text,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
@@ -12,7 +13,6 @@ import postImage from "@/assets/images/post/post.png";
 import BottomButton from "@/components/BottomButton";
 import Comments from "@/components/home/Comments";
 import { useTranslation } from "react-i18next";
-import ThemedText from "@/components/ThemedText";
 
 const Post = () => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const Post = () => {
   }
 
   if (error || commentsError) {
-    return <ThemedText>An error occured</ThemedText>;
+    return <Text style={{ fontFamily: "Inter" }}>An error occured</Text>;
   }
 
   return (
@@ -49,19 +49,25 @@ const Post = () => {
         <View className="min-h-[430] items-center justify-end space-y-8 rounded-b-[20] bg-white pb-10">
           <StatusBar barStyle="dark-content" />
 
-          <ThemedText className="px-4 text-center text-[28px] font-bold">
+          <Text
+            style={{ fontFamily: "Inter" }}
+            className="px-4 text-center text-[28px] font-bold"
+          >
             {data?.title}
-          </ThemedText>
+          </Text>
           <Image source={postImage} />
         </View>
 
         <View className="mx-4">
           <View>
-            <ThemedText className="mb-2 text-secondary-grey">
+            <Text
+              style={{ fontFamily: "Inter" }}
+              className="mb-2 text-secondary-grey"
+            >
               {t("about")}
-            </ThemedText>
+            </Text>
             <View className="rounded-[16px] bg-white p-4">
-              <ThemedText>{data?.body}</ThemedText>
+              <Text style={{ fontFamily: "Inter" }}>{data?.body}</Text>
             </View>
           </View>
 
